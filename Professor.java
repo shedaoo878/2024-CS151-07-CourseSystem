@@ -6,20 +6,21 @@ import java.util.Scanner;
 
 public class Professor {
 	
+	
 	private String name;
 	private String education;
 	private ArrayList<Course> coursesTaught;
 	private String contactInfo;
 	private String employeeID;
-	private String department;
+	private double reviews;
 	
 	
-	 public Professor(String name, String education, String contactInfo, String department, String employeeID) {
+	 public Professor(String name, String education, String contactInfo,  String employeeID, double reviews) {
 		this.name = name;
 		this.education = education;
 		this.coursesTaught = new ArrayList<>();
 		this.contactInfo = contactInfo;
-		this.setDepartment(department);
+		this.reviews = reviews;
 		
 	}
 	
@@ -70,7 +71,7 @@ public class Professor {
 
 	public String getContactInfo() {
 		return contactInfo;
-	}
+}
 
 
 	public void setContactInfo(String contactInfo) {
@@ -88,13 +89,12 @@ public class Professor {
 	}
 
 
-	public String getDepartment() {
-		return department;
+	public double getReviews() {
+		return reviews;
 	}
 
 
-	public void setDepartment(String department) {
-		this.department = department;
-  }
-	
-}
+	public void setReviews(double reviews) {
+		this.reviews = reviews;
+	}
+ }
