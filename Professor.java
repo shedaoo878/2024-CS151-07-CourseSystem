@@ -1,26 +1,26 @@
-package courseSystem;
 import java.util.ArrayList;
 import java.time.LocalDateTime;
 
 
 
-public class Professor extends Person {
+public class Professor implements Person {
 	
-  private String name;
-	private String education;
+  	private String name;
 	private ArrayList<Course> coursesTaught;
-	private String contactInfo;
-	private String employeeID;
-	private double reviews;
-	private ArrayList<LocalDateTime> officeHours;
+	private int profID;
+	private Department dep;
+	private String email;
+
 	
-	
-	 public Professor(String name, String education, String contactInfo, String id) {
-		super(name,id,contactInfo);
-		this.education = education;
+	 public Professor(String name, int id, String email) {
+		this.name = name;
 		this.coursesTaught = new ArrayList<>();
+		this.email = email;
 	}
 	
+	public void printEmail(){
+		System.out.println("Email: " + email);
+	}
 	
 	public void addCourse(Course course) {
 		coursesTaught.add(course);
@@ -43,81 +43,31 @@ public class Professor extends Person {
 		}
 	}
 	
-	public void updateContactInfo(String newContactInfo) {
-        this.setContactInfo(newContactInfo);
-        System.out.println("Contact information updated for Professor " + name);
-    }
-	
-	
-	public void scheduleOfficeHours(LocalDateTime time) {
-        officeHours.add(time);
-        System.out.println("Office hours scheduled at: " + time);
-    }
-	
-	public void viewOfficeHours() {
-        System.out.println("Office hours for Professor " + getName() + ":");
-        for (LocalDateTime time : officeHours) {
-            System.out.println(time);
-        }
-	}
-	
 	public String getName() {
 		return name;
 	}
-	
-	public void setName(String name) {
-		this.name = name;
-	}
+	public Department getDepartment(){
+        return dep;
+    }
+    public void setDepartment(Department d){
+        dep = d;
+    }
 
-	public String getEducation() {
-		return education;
-	}
-
-	
-	public void setEducation(String education) {
-		this.education = education;
+	public int getEmployeeID() {
+		return profID;
 	}
 
 
-	public String getContactInfo() {
-		return contactInfo;
-	}
-
-
-	public void setContactInfo(String contactInfo) {
-		this.contactInfo = contactInfo;
-	}
-
-
-	public String getEmployeeID() {
-		return employeeID;
-	}
-
-
-	public void setEmployeeID(String employeeID) {
-		this.employeeID = employeeID;
-	}
-
-
-	public double getReviews() {
-		return reviews;
-	}
-
-
-	public void setReviews(double reviews) {
-		this.reviews = reviews;
+	public void setEmployeeID(int employeeID) {
+		this.profID = employeeID;
 	}
 	
-	
-
 
 	@Override
 	public void displayInfo() {
 		System.out.println("Professor Name: " + getName());
-		System.out.println("Education: " + getContactInfo());
-		System.out.println("ContactInfo: " + getContactInfo());
-    System.out.println("Professor's ID: " + getEmployeeID());
-		System.out.println("Review: " + getReviews());
+    	System.out.println("Professor's ID: " + getEmployeeID());
+	
 		
 	  }
 }

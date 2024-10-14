@@ -1,9 +1,10 @@
 import java.util.ArrayList;
+import java.util.List;
 
-public class Club {
+public class Club implements Registerable {
     private String clubName;
     private String description;
-    private ArrayList<Student> members;
+    private List<Student> members;
     private Campus campus;
     private int maxMembers;
 
@@ -28,7 +29,7 @@ public class Club {
         return members.remove(student);
     }
 
-    public ArrayList<Student> getMembers() {
+    public List<Student> getMembers() {
         return new ArrayList<>(members);
     }
 
@@ -90,5 +91,33 @@ public class Club {
     public String toString() {
         return "Club: " + clubName
                 + " (Members: " + getMemberCount() + "/" + maxMembers + ")";
+    }
+
+    @Override
+    public void register(Student student) {
+        if (student != null && !members.contains(student) && members.size() < maxMembers) {
+            members.add(student);
+            student.joinClub(this);  // Add this line (assuming Student class has a joinClub method)
+            System.out.println(student.getName() + " has been registered for the club: " + this.getClubName());
+        } else if (members.contains(student)) {
+            System.out.println(student.getName() + " is already a member of the club: " + this.getClubName());
+        } else if (members.size() >= maxMembers) {
+            System.out.println("Club is full. Registration failed for " + student.getName());
+        } else {
+            System.out.println("Invalid student. Club registration failed.");
+        }
+    }
+
+    @Override
+    public void drop(Student student) {
+        if (student != null && members.contains(student)) {
+            members.remove(student);
+            student.leaveClub(this);  // Add this line (assuming Student class has a leaveClub method)
+            System.out.println(student.getName() + " has been dropped from the club: " + this.getClubName());
+        } else if (!members.contains(student)) {
+            System.out.println(student.getName() + " is not a member of the club: " + this.getClubName());
+        } else {
+            System.out.println("Invalid student. Club drop failed.");
+        }
     }
 }
