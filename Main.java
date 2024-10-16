@@ -1,13 +1,25 @@
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class Main {
+    
+    private static List<Course> courses = new ArrayList<>();
+
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
         
-
-        Student bob = new Student("Bob", 3, "CS", 1, "ww");
+        Department cs = new Department("CS");
+        Student bob = new Student("Bob", 3, cs, 1, "ww");
         Professor trev = new Professor("trv", 1, "wwww");
+        Course course1 = new Course(trev, 3, cs, 30,"CS146", true, new ArrayList<String>());
+
+        courses.add(course1);
+
+        
         studentMainMenu(s, bob);
+
     }
 
     public static void studentMainMenu(Scanner s, Student student) {
@@ -29,7 +41,7 @@ public class Main {
                     student.printSchedule();
                     break;
                 case 2:
-                   // addClasses();
+                    student.addClasses(s, courses);
                     break;
                 case 3:
                     //joinClubs();

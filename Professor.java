@@ -12,7 +12,7 @@ public class Professor implements Person {
 	private String email;
 
 	
-	 public Professor(String name, int id, String email) {
+	public Professor(String name, int id, String email) {
 		this.name = name;
 		this.coursesTaught = new ArrayList<>();
 		this.email = email;
@@ -23,8 +23,14 @@ public class Professor implements Person {
 	}
 	
 	public void addCourse(Course course) {
-		coursesTaught.add(course);
-		System.out.println(course.getTitle() + " successfully added for Professor's courses!");
+		if(!coursesTaught.contains(course)){
+			coursesTaught.add(course);
+			System.out.println(course.getTitle() + " successfully added for Professor's courses!");
+		}
+		else{
+			System.out.print("Professor is already teaching this course!");
+		}
+		
 	}
 	
 	public void removeCourse(Course course) {
@@ -32,7 +38,7 @@ public class Professor implements Person {
 			coursesTaught.remove(course);
 			System.out.println(course.getTitle() + " successfully removed from Professor's courses!");
 		}else {
-			System.out.println("You can't remove a course the professor isn't teaching! :c");
+			System.out.println("You can't remove a course the professor isn't teaching!");
 		}
 	}
 	

@@ -1,11 +1,12 @@
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Student implements Person {
     private String name;
     private int grade;
-    private String major;
+   
     private int studentId;
     private ArrayList<Course> currentEnrolledCourses;
     private String email;
@@ -19,15 +20,15 @@ public class Student implements Person {
 
 
     
-    public Student(String name, int grade, String major, int studentId, String email) {
+    public Student(String name, int grade, Department department, int studentId, String email) {
         this.name = name;
         this.grade = grade;
-        this.major = major;
         this.studentId = studentId;
         this.email = email;
         this.currentEnrolledCourses = new ArrayList<Course>();
         this.courseCredits = 0;
         this.clubs = new ArrayList<>();
+        this.department = department;
     }
 
     @Override
@@ -54,13 +55,7 @@ public class Student implements Person {
         dep = d;
     }
 
-    public String getMajor() {
-        return major;
-    }
-
-    public void setMajor(String major) {
-        this.major = major;
-    }
+    
     public void getCurrentCredits(){
         System.out.println("Current course credits: " + courseCredits);
     }
@@ -109,10 +104,9 @@ public class Student implements Person {
         System.out.println("Student Information for " + name + " ------------");
         System.out.println("Student ID: " + studentId);
         System.out.println("Grade: " + grade);
-        System.out.println("Major: " + major);
         System.out.println("Email: " + email);
         System.out.println("Course Credits: " + courseCredits);
-        System.out.println("Department: " + (dep != null ? dep.toString() : "Not assigned"));
+        System.out.println("Department: " + (dep != null ? dep.getName() : "Not assigned"));
         //System.out.println("Campus: " + (campus != null ? campus.getName() : "Not assigned"));
         
         System.out.println("Current Enrolled Courses:");
@@ -141,5 +135,46 @@ public class Student implements Person {
 
     public List<Club> getClubs() {
         return new ArrayList<>(clubs);
+    }
+
+    public void addClasses(Scanner scanner, List<Course> availableCourses) {
+        System.out.println("Available Courses:");
+        for (int i = 0; i < availableCourses.size(); i++) {
+            System.out.println((i + 1) + ". " + availableCourses.get(i).getTitle());
+        }
+        
+        System.out.print("Enter the number of a course to view info and register: ");
+
+
+        int choice = scanner.nextInt();
+        
+        while (choice != 0) {
+            if (choice > 0 && choice <= availableCourses.size()) {
+                Course selectedCourse = availableCourses.get(choice - 1);
+                System.out.println();
+                selectedCourse.printCourseInfo();
+                System.out.println("Would you like to register for this course? (y to register / n to not register and return back to course menu)");    
+
+                String willRegister = scanner.next();
+                if(willRegister.equals("y")){
+                    this.registerClass(selectedCourse);
+                    choice = 0;
+                }
+                else if(willRegister.equals("n")){
+                    choice = 0;
+                    addClasses(scanner, availableCourses);
+                }
+                else{
+                    System.out.println("Invalid input.");
+                }
+
+                
+            } else {
+                System.out.println("Invalid choice. Please try again.");
+            }
+            
+            System.out.print("Enter another course number (0 to finish): ");
+            choice = scanner.nextInt();
+        }
     }
 }
