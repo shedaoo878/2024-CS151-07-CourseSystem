@@ -17,27 +17,28 @@ public class Department{
     private ArrayList<Professor> profsInDep;
 
 
-    public Department(String depName, ArrayList<Course> coursesInDep, ArrayList<Student> studentsInDep, ArrayList<Professor> profsInDep) {
-        depName =  this.depName;
-        coursesInDep =  this.coursesInDep;
-        studentsInDep =  this.studentsInDep;
-        profsInDep =  this.profsInDep;
+    public Department(String depName) {
+        this.depName = depName;
+        this.coursesInDep = new ArrayList<Course>();
+        this.studentsInDep = new ArrayList<Student>();
+        this.profsInDep = new ArrayList<Professor>();
     }
 
     public void addCourse(Course c){
         c.setDepartment(this);
-        System.out.println(c.getTitle() + "now belongs to the " + this.toString() + "department." );
+        coursesInDep.add(c);
     }
     public void addStudent(Student s){
         s.setDepartment(this);
+        studentsInDep.add(s);
     }
     public void addProf(Professor p){
-        
+        p.setDepartment(this);
+        profsInDep.add(p);
     }
     
 
-    @Override
-    public String toString(){
+    public String getName(){
         return this.depName;
     }
 

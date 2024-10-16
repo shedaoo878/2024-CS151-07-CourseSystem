@@ -2,28 +2,27 @@ import java.util.ArrayList;
 
 public class Course implements Registerable{
 
-    private String professor;
-    private int section;
+    private Professor professor;
     private ArrayList<String> allowedMajors;
     private int credits;
-    private String department;
+    private Department department;
     private int maxAllowed;
     private String classroom;
     private String title;
     private ArrayList<Student> enrolledStudents;
+    private int currentNumStudents;
     
 
-    public Course(String professor, int section, ArrayList<String> allowedMajors, int credits,
-                  String department, int maxAllowed, String classroom, String title, boolean available, ArrayList<String> enrolledStudents, String timing) {
+    public Course(Professor professor, int credits,
+                  Department department, int maxAllowed, String title, boolean available, ArrayList<String> enrolledStudents) {
         this.professor = professor;
-        this.section = section;
         this.allowedMajors = new ArrayList<String>();
         this.credits = credits;
         this.department = department;
         this.maxAllowed = maxAllowed;
-        this.classroom = classroom;
         this.title = title;
         this.enrolledStudents = new ArrayList<Student>();
+        this.currentNumStudents = 0;
     }
 
     // getter and setter methods
@@ -34,19 +33,13 @@ public class Course implements Registerable{
         this.title = title;
     }
 
-    public String getProfessor() {
+    public Professor getProfessor() {
         return professor;
     }
-    public void setProfessor(String professor) {
+    public void setProfessor(Professor professor) {
         this.professor = professor;
     }
 
-    public int getSection() {
-        return section;
-    }
-    public void setSection(int section) {
-        this.section = section;
-    }
 
     public ArrayList<String> getAllowedMajors() {
         return allowedMajors;
@@ -96,19 +89,23 @@ public class Course implements Registerable{
         }
     }
 
+    public int getCurrentNumStudents(){
+        return currentNumStudents;
+    }
 
     @Override
     public void register(Student student) {
-        if (student != null && !enrolledStudents.contains(student) && enrolledStudents.size() < maxAllowed && allowedMajors.contains(student.getMajor())) {
+        if (student != null && !enrolledStudents.contains(student) && enrolledStudents.size() < maxAllowed && student.getDepartment() == this.department) {
             enrolledStudents.add(student);  
             student.registerClass(this);
+            currentNumStudents++;
         } else if (enrolledStudents.contains(student)) {
             System.out.println(student.getName() + " is already registered for " + this.getTitle());
         } else if (enrolledStudents.size() >= maxAllowed) {
             System.out.println("Course is full. Registration failed for " + student.getName());
         } 
-        else if(!allowedMajors.contains(student.getMajor())){
-            System.out.println("This student is not allowed to take this course. Allowed majors are " + allowedMajors);
+        else if(student.getDepartment() != this.department){
+            System.out.println("This student is not allowed to take this course. Allowed department is " + department.getName());
         }
         else {
             System.out.println("Invalid student. Registration failed.");
@@ -124,6 +121,15 @@ public class Course implements Registerable{
         else{
             System.out.println("This student cannot be dropped since student is not enrolled.");
         }
+    }
+    public void printCourseInfo(){
+        System.out.println("Course: " + title);
+        System.out.println("Professor: " + professor);
+        System.out.println("Credits: " + credits);
+        System.out.println("Allowed Department: " + department);
+        System.out.println("Current capacity: " + maxAllowed);
+        System.out.println("Classroom: " + classroom);
+        System.out.println("Current capacity: " + currentNumStudents + "/" + maxAllowed);
     }
 }
 
