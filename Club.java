@@ -59,6 +59,7 @@ public class Club implements Registerable {
     public boolean removeMember(Student student) {
         return members.remove(student);
     }
+    
 
     public String listMembers() {
         if (members.isEmpty()) {
@@ -97,8 +98,6 @@ public class Club implements Registerable {
         System.out.println("Description: " + description);
         System.out.println("Members: " + members.size() + "/" + maxMembers);
     }
-
-  
     public String getClubName() {
         return clubName;
     }

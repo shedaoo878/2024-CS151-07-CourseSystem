@@ -14,7 +14,6 @@ public class Student implements Person {
     private Department dep;
     private List<Club> clubs;
     private Campus campus;
-    private Department department;
     final int MAXCREDITS = 15;
     final int MINCREDITS = 12;
 
@@ -28,7 +27,7 @@ public class Student implements Person {
         this.currentEnrolledCourses = new ArrayList<Course>();
         this.courseCredits = 0;
         this.clubs = new ArrayList<>();
-        this.department = department;
+        this.dep = department;
     }
 
     @Override
@@ -85,6 +84,10 @@ public class Student implements Person {
             getCurrentCredits();
         }
     }
+    
+
+
+
 
     public ArrayList<Course> getCurrentEnrolledCourses() {
         return new ArrayList<>(currentEnrolledCourses);
@@ -98,6 +101,7 @@ public class Student implements Person {
                 System.out.println("  - " + course.getTitle() + "- Professor: " + course.getProfessor() + " ----");
             }
         }
+        System.out.println();
     }
     
     public void displayInfo() {
@@ -108,7 +112,7 @@ public class Student implements Person {
         System.out.println("Course Credits: " + courseCredits);
         System.out.println("Department: " + (dep != null ? dep.getName() : "Not assigned"));
         //System.out.println("Campus: " + (campus != null ? campus.getName() : "Not assigned"));
-        
+        System.out.println();
         System.out.println("Current Enrolled Courses:");
         if (currentEnrolledCourses.isEmpty()) {
             System.out.println("  No courses enrolled");
@@ -117,15 +121,15 @@ public class Student implements Person {
                 System.out.println("  - " + course.getTitle());
             }
         }
-        
+        System.out.println();
         System.out.println("Clubs:");
-        // if (clubs.isEmpty()) {
-        //     System.out.println("  No clubs joined");
-        // } else {
-        //     for (Club club : clubs) {
-        //         System.out.println("  - " + club.getTitle());
-        //     }
-        // }
+        if (clubs.isEmpty()) {
+            System.out.println("  No clubs joined");
+        } else {
+            for (Club club : clubs) {
+                System.out.println(" -- " + club.getClubName());
+            }
+        }
         System.out.println("--------------------------------------------");
     }
 
@@ -143,7 +147,7 @@ public class Student implements Person {
             System.out.println((i + 1) + ". " + availableCourses.get(i).getTitle());
         }
         
-        System.out.print("Enter the number of a course to view info and register: ");
+        System.out.print("Enter the number of a course to view info and register (enter 0 to exit to main menu): ");
 
 
         int choice = scanner.nextInt();
@@ -153,11 +157,12 @@ public class Student implements Person {
                 Course selectedCourse = availableCourses.get(choice - 1);
                 System.out.println();
                 selectedCourse.printCourseInfo();
-                System.out.println("Would you like to register for this course? (y to register / n to not register and return back to course menu)");    
+                System.out.print("Would you like to register for this course? (y to register / n to not register and return back to course menu): ");    
 
                 String willRegister = scanner.next();
                 if(willRegister.equals("y")){
                     this.registerClass(selectedCourse);
+                    currentEnrolledCourses.add(selectedCourse);
                     choice = 0;
                 }
                 else if(willRegister.equals("n")){
@@ -172,9 +177,47 @@ public class Student implements Person {
             } else {
                 System.out.println("Invalid choice. Please try again.");
             }
+            return;
             
-            System.out.print("Enter another course number (0 to finish): ");
-            choice = scanner.nextInt();
+            
         }
     }
+    public void joinClubs(Scanner s, List<Club> availableClubs) {
+        System.out.println();
+        System.out.println("Available Clubs:");
+        for (int i = 0; i < availableClubs.size(); i++) {
+            System.out.println((i + 1) + ". " + availableClubs.get(i).getClubName());
+        }
+        
+        System.out.print("Enter the number of a club to view info and register (enter 0 to exit to main menu): ");
+        int choice = s.nextInt();
+
+        if (choice == 0) {
+            return; 
+        } 
+        else if (choice > 0 && choice <= availableClubs.size()) {
+            Club selectedClub = availableClubs.get(choice - 1);
+            selectedClub.printClubDetails();
+            System.out.println();
+
+            System.out.print("Do you want to join this club? (y to join / n to cancel and return back to club menu): ");
+            String response = s.nextLine();
+
+            if (response.equals("y")) {
+                selectedClub.register(this);
+                clubs.add(selectedClub);
+            } else if (response.equals("n")) {
+                joinClubs(s, availableClubs);
+            } else {
+                System.out.println("Invalid input.");
+            }
+        } 
+        else {
+            System.out.println("Invalid choice. Please try again.");
+        }
+    }
+    
+    
 }
+
+    
