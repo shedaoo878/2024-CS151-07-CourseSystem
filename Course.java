@@ -131,7 +131,7 @@ public class Course {
     //listStudents()
     public String listStudents() {
         if(enrolledStudents.isEmpty()) {
-            return "No students are in this class.";
+            return "There are no students in this class."
         }
         else {
             return String.join(" ,", enrolledStudents);
