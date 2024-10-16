@@ -1,12 +1,3 @@
-// - departmentName
-// -courses[]
-// - professors[]
-// -students[]
-// - addDepartment()
-// - removeDepartment()
-// - addProfessor()
-// - addStudent()
-
 
 import java.util.ArrayList;
 
@@ -15,13 +6,14 @@ public class Department{
     private ArrayList<Course> coursesInDep;
     private ArrayList<Student> studentsInDep;
     private ArrayList<Professor> profsInDep;
+    private Campus campus;
 
-
-    public Department(String depName) {
+    public Department(String depName, Campus campus) {
         this.depName = depName;
         this.coursesInDep = new ArrayList<Course>();
         this.studentsInDep = new ArrayList<Student>();
         this.profsInDep = new ArrayList<Professor>();
+        this.campus = campus;
     }
 
     public void addCourse(Course c){

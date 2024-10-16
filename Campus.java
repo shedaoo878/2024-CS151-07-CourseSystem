@@ -7,9 +7,8 @@ public class Campus {
     private ArrayList<Club> clubs;
     private ArrayList<Course> courses;
 
-    public Campus(String campusName, String location) {
+    public Campus(String campusName) {
         this.campusName = campusName;
-        this.location = location;
         this.departments = new ArrayList<>();
         this.clubs = new ArrayList<>();
         this.courses = new ArrayList<>();

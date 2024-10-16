@@ -6,16 +6,23 @@ import java.util.List;
 public class Main {
     
     private static List<Course> courses = new ArrayList<>();
-
+    private static List<Club> clubs = new ArrayList<>();
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
         
-        Department cs = new Department("CS");
+        Campus sjsu = new Campus("SJSU");
+        Department cs = new Department("CS", sjsu);
+
         Student bob = new Student("Bob", 3, cs, 1, "ww");
         Professor trev = new Professor("trv", 1, "wwww");
+        
         Course course1 = new Course(trev, 3, cs, 30,"CS146", true, new ArrayList<String>());
-
         courses.add(course1);
+
+        Club club1 = new Club("Robotics", "Builds robots and other stuff.", sjsu, 20);
+        Club club2 = new Club("OOP club", "We learn about OOP.", sjsu, 8);
+        clubs.add(club1);
+        clubs.add(club2);
 
         
         studentMainMenu(s, bob);
@@ -25,12 +32,13 @@ public class Main {
     public static void studentMainMenu(Scanner s, Student student) {
         boolean exit = false;
         while (!exit) {
-            System.out.println("Welcome to the Campus System");
+            System.out.println("WELCOME TO THE CAMPUS SYSTEM");
             System.out.println("1 - View Schedule");
             System.out.println("2 - Add Classes");
             System.out.println("3 - Join Clubs");
             System.out.println("4 - View Info");
             System.out.println("5 - Exit");
+            System.out.println();
             System.out.print("Please enter your choice: ");
 
             int choice = s.nextInt();
@@ -44,7 +52,7 @@ public class Main {
                     student.addClasses(s, courses);
                     break;
                 case 3:
-                    //joinClubs();
+                    student.joinClubs(s, clubs);
                     break;
                 case 4:
                     student.displayInfo();

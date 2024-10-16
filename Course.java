@@ -97,8 +97,8 @@ public class Course implements Registerable{
     public void register(Student student) {
         if (student != null && !enrolledStudents.contains(student) && enrolledStudents.size() < maxAllowed && student.getDepartment() == this.department) {
             enrolledStudents.add(student);  
-            student.registerClass(this);
             currentNumStudents++;
+            System.out.println(student.getName() + " is now registered for " + this.getTitle());
         } else if (enrolledStudents.contains(student)) {
             System.out.println(student.getName() + " is already registered for " + this.getTitle());
         } else if (enrolledStudents.size() >= maxAllowed) {
@@ -130,6 +130,7 @@ public class Course implements Registerable{
         System.out.println("Current capacity: " + maxAllowed);
         System.out.println("Classroom: " + classroom);
         System.out.println("Current capacity: " + currentNumStudents + "/" + maxAllowed);
+        System.out.println();
     }
 }
 
