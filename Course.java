@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Course {
+public class Course implements Registerable{
 
     private String professor;
     private int section;
@@ -10,30 +10,26 @@ public class Course {
     private int maxAllowed;
     private String classroom;
     private String title;
-    private boolean available;
-    private ArrayList<String> enrolledStudents;
-    private String timing;
+    private ArrayList<Student> enrolledStudents;
+    
 
     public Course(String professor, int section, ArrayList<String> allowedMajors, int credits,
                   String department, int maxAllowed, String classroom, String title, boolean available, ArrayList<String> enrolledStudents, String timing) {
         this.professor = professor;
         this.section = section;
-        this.timing = timing;
         this.allowedMajors = new ArrayList<String>();
         this.credits = credits;
         this.department = department;
         this.maxAllowed = maxAllowed;
         this.classroom = classroom;
         this.title = title;
-        this.available = available;
-        this.enrolledStudents = new ArrayList<String>();
+        this.enrolledStudents = new ArrayList<Student>();
     }
 
     // getter and setter methods
     public String getTitle() {
         return title;
     }
-
     public void setTitle(String title) {
         this.title = title;
     }
@@ -41,7 +37,6 @@ public class Course {
     public String getProfessor() {
         return professor;
     }
-
     public void setProfessor(String professor) {
         this.professor = professor;
     }
@@ -49,7 +44,6 @@ public class Course {
     public int getSection() {
         return section;
     }
-
     public void setSection(int section) {
         this.section = section;
     }
@@ -57,7 +51,6 @@ public class Course {
     public ArrayList<String> getAllowedMajors() {
         return allowedMajors;
     }
-
     public void setAllowedMajors(ArrayList<String> allowedMajors) {
         this.allowedMajors = allowedMajors;
     }
@@ -65,23 +58,20 @@ public class Course {
     public int getCredits() {
         return credits;
     }
-
     public void setCredits(int credits) {
         this.credits = credits;
     }
 
-    public String getDepartment() {
+    public Department getDepartment() {
         return department;
     }
-
-    public void setDepartment(String department) {
+    public void setDepartment(Department department) {
         this.department = department;
     }
 
     public int getMaxAllowed() {
         return maxAllowed;
     }
-
     public void setMaxAllowed(int maxAllowed) {
         this.maxAllowed = maxAllowed;
     }
@@ -89,52 +79,53 @@ public class Course {
     public String getClassroom() {
         return classroom;
     }
-
     public void setClassroom(String classroom) {
         this.classroom = classroom;
     }
-
-    public void setAvailable(boolean available) {
-        this.available = available;
-    }
-
-    //isAvailable()
-    public boolean isAvailable() {
-        return enrolledStudents.size() <= maxAllowed;
-    }
-
-    //isWaitlist()
     public boolean isWaitlist() {
         return enrolledStudents.size() > maxAllowed;
     }
-
-    //addStudent()
-    public boolean addStudent(String student, String major) {
-        if(enrolledStudents.size() < maxAllowed && allowedMajors.contains(major)) {
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-    //removeStudent()
-    public boolean removeStudent(String student) {
-        if(enrolledStudents.contains(student)) {
-            enrolledStudents.remove(student);
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-
-    //listStudents()
+    
+    
     public String listStudents() {
         if(enrolledStudents.isEmpty()) {
-            return "There are no students in this class."
+            return "No students are in this class.";
         }
         else {
             return String.join(" ,", enrolledStudents);
         }
     }
+
+
+    @Override
+    public void register(Student student) {
+        if (student != null && !enrolledStudents.contains(student) && enrolledStudents.size() < maxAllowed && allowedMajors.contains(student.getMajor())) {
+            enrolledStudents.add(student);  
+            student.registerClass(this);
+        } else if (enrolledStudents.contains(student)) {
+            System.out.println(student.getName() + " is already registered for " + this.getTitle());
+        } else if (enrolledStudents.size() >= maxAllowed) {
+            System.out.println("Course is full. Registration failed for " + student.getName());
+        } 
+        else if(!allowedMajors.contains(student.getMajor())){
+            System.out.println("This student is not allowed to take this course. Allowed majors are " + allowedMajors);
+        }
+        else {
+            System.out.println("Invalid student. Registration failed.");
+        }
+    }
+
+    @Override
+    public void drop(Student student){
+        if(enrolledStudents.contains(student)){
+            enrolledStudents.remove(student);
+            System.out.println("Student has been removed from course.");
+        }
+        else{
+            System.out.println("This student cannot be dropped since student is not enrolled.");
+        }
+    }
 }
+
+
+
