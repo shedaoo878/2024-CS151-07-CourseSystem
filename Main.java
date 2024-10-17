@@ -11,20 +11,28 @@ public class Main {
         Scanner s = new Scanner(System.in);
         
         Campus sjsu = new Campus("SJSU");
-        Department cs = new Department("CS", sjsu);
 
-        Student bob = new Student("Bob", 3, cs, 1, "ww");
+        Department cs = new Department("CS", sjsu);
+        Department business = new Department("Business", sjsu);
+
+        Student bob = new Student("Bob", 3, cs, 1, "ww", sjsu);
         Professor trev = new Professor("trv", 1, "wwww");
+        Professor jensen = new Professor("Jensen", 2, "wwty");
         
-        Course course1 = new Course(trev, 3, cs, 30,"CS146", true, new ArrayList<String>());
+        Course course1 = new Course(trev, 3, cs, 30,"CS146", true, new ArrayList<String>(), "Duncan Hall 412");
+        Course course2 = new Course(jensen, 3, business, 30, "BUS4118D", true, new ArrayList<String>(), "BBC 320");
+        Course course3 = new Course(trev, 3, cs, 30,"CS151", true, new ArrayList<String>(), "Duncan Hall 416");
         courses.add(course1);
+        courses.add(course2);
+        courses.add(course3);
 
         Club club1 = new Club("Robotics", "Builds robots and other stuff.", sjsu, 20);
         Club club2 = new Club("OOP club", "We learn about OOP.", sjsu, 8);
+        Club club3 = new Club("MISA", "Learn about careers in MIS.", sjsu, 70);
         clubs.add(club1);
         clubs.add(club2);
+        clubs.add(club3);
 
-        
         studentMainMenu(s, bob);
 
     }

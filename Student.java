@@ -6,7 +6,6 @@ import java.util.Scanner;
 public class Student implements Person {
     private String name;
     private int grade;
-   
     private int studentId;
     private ArrayList<Course> currentEnrolledCourses;
     private String email;
@@ -16,10 +15,8 @@ public class Student implements Person {
     private Campus campus;
     final int MAXCREDITS = 15;
     final int MINCREDITS = 12;
-
-
     
-    public Student(String name, int grade, Department department, int studentId, String email) {
+    public Student(String name, int grade, Department department, int studentId, String email, Campus campus) {
         this.name = name;
         this.grade = grade;
         this.studentId = studentId;
@@ -28,6 +25,7 @@ public class Student implements Person {
         this.courseCredits = 0;
         this.clubs = new ArrayList<>();
         this.dep = department;
+        this.campus = campus;
     }
 
     @Override
@@ -54,7 +52,6 @@ public class Student implements Person {
         dep = d;
     }
 
-    
     public void getCurrentCredits(){
         System.out.println("Current course credits: " + courseCredits);
     }
@@ -66,6 +63,10 @@ public class Student implements Person {
 
 
     public void registerClass(Registerable course) {
+        if (((Course) course).getDepartment() != this.getDepartment()) {
+            System.out.println("This student is not allowed to take this course. Allowed department is " + ((Course) course).getDepartment().getName());
+            return;
+        }
         if((((Course)course).getCredits() + courseCredits) < MAXCREDITS){
             ((Course)course).register(this);
         }
@@ -84,10 +85,6 @@ public class Student implements Person {
             getCurrentCredits();
         }
     }
-    
-
-
-
 
     public ArrayList<Course> getCurrentEnrolledCourses() {
         return new ArrayList<>(currentEnrolledCourses);
@@ -98,7 +95,7 @@ public class Student implements Person {
             System.out.println("  No courses enrolled");
         } else {
             for (Course course : currentEnrolledCourses) {
-                System.out.println("  - " + course.getTitle() + "- Professor: " + course.getProfessor() + " ----");
+                System.out.println("  - " + course.getTitle() + "- Professor: " + course.getProfessor().getName() + " ----");
             }
         }
         System.out.println();
@@ -111,7 +108,7 @@ public class Student implements Person {
         System.out.println("Email: " + email);
         System.out.println("Course Credits: " + courseCredits);
         System.out.println("Department: " + (dep != null ? dep.getName() : "Not assigned"));
-        //System.out.println("Campus: " + (campus != null ? campus.getName() : "Not assigned"));
+        System.out.println("Campus: " + (campus != null ? campus.getCampusName() : "Not assigned"));
         System.out.println();
         System.out.println("Current Enrolled Courses:");
         if (currentEnrolledCourses.isEmpty()) {
@@ -188,20 +185,19 @@ public class Student implements Person {
         for (int i = 0; i < availableClubs.size(); i++) {
             System.out.println((i + 1) + ". " + availableClubs.get(i).getClubName());
         }
-        
+
         System.out.print("Enter the number of a club to view info and register (enter 0 to exit to main menu): ");
         int choice = s.nextInt();
 
         if (choice == 0) {
-            return; 
-        } 
-        else if (choice > 0 && choice <= availableClubs.size()) {
+            return;
+        } else if (choice > 0 && choice <= availableClubs.size()) {
             Club selectedClub = availableClubs.get(choice - 1);
             selectedClub.printClubDetails();
             System.out.println();
 
             System.out.print("Do you want to join this club? (y to join / n to cancel and return back to club menu): ");
-            String response = s.nextLine();
+            String response = s.next();
 
             if (response.equals("y")) {
                 selectedClub.register(this);
@@ -211,13 +207,10 @@ public class Student implements Person {
             } else {
                 System.out.println("Invalid input.");
             }
-        } 
-        else {
+        } else {
             System.out.println("Invalid choice. Please try again.");
         }
     }
-    
-    
 }
 
     
