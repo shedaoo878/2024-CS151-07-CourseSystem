@@ -14,7 +14,7 @@ public class Course implements Registerable{
     
 
     public Course(Professor professor, int credits,
-                  Department department, int maxAllowed, String title, boolean available, ArrayList<String> enrolledStudents) {
+                  Department department, int maxAllowed, String title, boolean available, ArrayList<String> enrolledStudents, String classroom) {
         this.professor = professor;
         this.allowedMajors = new ArrayList<String>();
         this.credits = credits;
@@ -23,6 +23,7 @@ public class Course implements Registerable{
         this.title = title;
         this.enrolledStudents = new ArrayList<Student>();
         this.currentNumStudents = 0;
+        this.classroom = classroom;
     }
 
     // getter and setter methods
@@ -85,7 +86,12 @@ public class Course implements Registerable{
             return "No students are in this class.";
         }
         else {
-            return String.join(" ,", enrolledStudents);
+            //return String.join(" ,", enrolledStudents);
+            ArrayList<String> studentName = new ArrayList<>();
+            for (Student s : enrolledStudents) {
+                studentName.add(s.getName());
+            }
+            return String.join(", ", studentName);
         }
     }
 
@@ -93,8 +99,16 @@ public class Course implements Registerable{
         return currentNumStudents;
     }
 
+    public int getEnrolledStudents() {
+        return enrolledStudents.size();
+    }
+
     @Override
     public void register(Student student) {
+        if (student.getDepartment() != this.department) {
+            System.out.println("This student is not allowed to take this course. Allowed department is " + department.getName());
+            return;
+        }
         if (student != null && !enrolledStudents.contains(student) && enrolledStudents.size() < maxAllowed && student.getDepartment() == this.department) {
             enrolledStudents.add(student);  
             currentNumStudents++;
@@ -124,9 +138,9 @@ public class Course implements Registerable{
     }
     public void printCourseInfo(){
         System.out.println("Course: " + title);
-        System.out.println("Professor: " + professor);
+        System.out.println("Professor: " + professor.getName());
         System.out.println("Credits: " + credits);
-        System.out.println("Allowed Department: " + department);
+        System.out.println("Allowed Department: " + department.getName());
         System.out.println("Current capacity: " + maxAllowed);
         System.out.println("Classroom: " + classroom);
         System.out.println("Current capacity: " + currentNumStudents + "/" + maxAllowed);
