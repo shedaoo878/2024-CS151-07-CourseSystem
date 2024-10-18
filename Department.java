@@ -34,5 +34,11 @@ public class Department{
         return this.depName;
     }
 
+    public Campus getCampus(){
+        return this.campus;
+    }
+
+    
+
     
 }

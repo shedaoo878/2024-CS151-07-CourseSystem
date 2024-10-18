@@ -19,9 +19,9 @@ public class Main {
         Professor trev = new Professor("trv", 1, "wwww");
         Professor jensen = new Professor("Jensen", 2, "wwty");
         
-        Course course1 = new Course(trev, 3, cs, 30,"CS146", true, new ArrayList<String>(), "Duncan Hall 412");
-        Course course2 = new Course(jensen, 3, business, 30, "BUS4118D", true, new ArrayList<String>(), "BBC 320");
-        Course course3 = new Course(trev, 3, cs, 30,"CS151", true, new ArrayList<String>(), "Duncan Hall 416");
+        Course course1 = new Course(trev, 3, cs, 30,"CS146", true, new ArrayList<String>());
+        Course course2 = new Course(jensen, 3, business, 30, "BUS4118D", true, new ArrayList<String>());
+        Course course3 = new Course(trev, 3, cs, 30,"CS151", true, new ArrayList<String>());
         courses.add(course1);
         courses.add(course2);
         courses.add(course3);
