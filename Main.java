@@ -13,6 +13,7 @@ public class Main {
         Scanner s = new Scanner(System.in);
         
 <<<<<<< HEAD
+<<<<<<< HEAD
         Campus sjsu = new Campus("SJSU");
 
         Department cs = new Department("CS", sjsu);
@@ -40,6 +41,11 @@ public class Main {
 
 =======
         try {
+=======
+
+
+
+>>>>>>> 56248368bbf81df4e90de27086102f0addf19d3c
             Campus sjsu = new Campus("SJSU");
             Department cs = new Department("CS", sjsu);
             Department business = new Department("Business", sjsu);
@@ -90,7 +96,11 @@ public class Main {
         } finally {
             s.close();
         }
+<<<<<<< HEAD
 >>>>>>> main
+=======
+
+>>>>>>> 56248368bbf81df4e90de27086102f0addf19d3c
     }
 
     public static void studentMainMenu(Scanner s, Student student) {
