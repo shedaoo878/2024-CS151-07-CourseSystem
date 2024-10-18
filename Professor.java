@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-
+import java.time.LocalDateTime;
 
 
 
@@ -10,12 +10,14 @@ public class Professor implements Person {
 	private int profID;
 	private Department dep;
 	private String email;
+	private ArrayList<LocalDateTime> officeHours;
 
 	
 	public Professor(String name, int id, String email) {
 		this.name = name;
 		this.coursesTaught = new ArrayList<>();
 		this.email = email;
+		this.officeHours = new ArrayList<>();
 	}
 	
 	public void printEmail(){
@@ -48,6 +50,18 @@ public class Professor implements Person {
 			System.out.println(course.getTitle());
 		}
 	}
+
+	public void scheduleOfficeHours(LocalDateTime time) {
+	       officeHours.add(time);
+	       System.out.println("Office hours scheduled at: " + time);
+	   }
+		
+		public void viewOfficeHours() {
+	       System.out.println("Office hours for Professor " + getName() + ":");
+	       for (LocalDateTime time : officeHours) {
+	           System.out.println(time);
+	       }
+		}
 	
 	public String getName() {
 		return name;
