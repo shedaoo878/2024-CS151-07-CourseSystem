@@ -147,6 +147,3 @@ public class Course implements Registerable{
         System.out.println();
     }
 }
-
-
-
