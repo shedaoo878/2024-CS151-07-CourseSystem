@@ -3,5 +3,5 @@ public interface Admin {
 
 	void removeStudent(Student student);
 
-	void viewDepartmentDetails();
+	void viewDepartmentInfo();
 }
