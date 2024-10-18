@@ -28,6 +28,13 @@ public class Main {
         jensen.scheduleOfficeHours(LDT4);
         trev.viewOfficeHours();
         jensen.viewOfficeHours();
+         trev.viewCourses();
+        jensen.viewCourses();
+        trev.addCourse(course1);
+        trev.addCourse(course3);
+        jensen.addCourse(course2);
+        trev.displayInfo();
+        jensen.displayInfo();
         
         Course course1 = new Course(trev, 3, cs, 30,"CS146", true, new ArrayList<String>(), "Duncan Hall 412");
         Course course2 = new Course(jensen, 3, business, 30, "BUS4118D", true, new ArrayList<String>(), "BBC 320");
