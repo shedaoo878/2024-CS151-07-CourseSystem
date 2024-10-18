@@ -1,5 +1,3 @@
-package courseSystem;
-
 import java.util.Scanner;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
