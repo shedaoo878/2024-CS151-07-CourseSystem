@@ -1,7 +1,10 @@
+package courseSystem;
+
 import java.util.Scanner;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.time.LocalDateTime;
+
 
 public class Main {
     
@@ -16,25 +19,8 @@ public class Main {
         Department business = new Department("Business", sjsu);
 
         Student bob = new Student("Bob", 3, cs, 1, "ww", sjsu);
-        Professor trev = new Professor("trv", 1, "wwww");
-        Professor jensen = new Professor("Jensen", 2, "wwty");
-        LocalDateTime LDT1 = LocalDateTime.of(2024, 10, 20, 14, 0);
-        LocalDateTime LDT2 = LocalDateTime.of(2024, 10, 22, 14, 0);
-        LocalDateTime LDT3 = LocalDateTime.of(2024, 10, 20, 15, 30);
-        LocalDateTime LDT4 = LocalDateTime.of(2024, 10, 22, 15, 30);
-        trev.scheduleOfficeHours(LDT1);
-        trev.scheduleOfficeHours(LDT2);
-        jensen.scheduleOfficeHours(LDT3);
-        jensen.scheduleOfficeHours(LDT4);
-        trev.viewOfficeHours();
-        jensen.viewOfficeHours();
-         trev.viewCourses();
-        jensen.viewCourses();
-        trev.addCourse(course1);
-        trev.addCourse(course3);
-        jensen.addCourse(course2);
-        trev.displayInfo();
-        jensen.displayInfo();
+        Professor trev = new Professor("Dr. Trev", 1, "wwww",cs);
+        Professor jensen = new Professor("Dr. Jensen", 2, "wwty",business);
         
         Course course1 = new Course(trev, 3, cs, 30,"CS146", true, new ArrayList<String>(), "Duncan Hall 412");
         Course course2 = new Course(jensen, 3, business, 30, "BUS4118D", true, new ArrayList<String>(), "BBC 320");
@@ -49,9 +35,27 @@ public class Main {
         clubs.add(club1);
         clubs.add(club2);
         clubs.add(club3);
-
         
-
+        LocalDateTime LDT1 = LocalDateTime.of(2024, 10, 20, 14, 0);
+        LocalDateTime LDT2 = LocalDateTime.of(2024, 10, 22, 14, 0);
+        LocalDateTime LDT3 = LocalDateTime.of(2024, 10, 20, 15, 30);
+        LocalDateTime LDT4 = LocalDateTime.of(2024, 10, 22, 15, 30);
+        trev.scheduleOfficeHours(LDT1);
+        trev.scheduleOfficeHours(LDT2);
+        jensen.scheduleOfficeHours(LDT3);
+        jensen.scheduleOfficeHours(LDT4);
+        trev.viewOfficeHours();
+        jensen.viewOfficeHours();
+        trev.viewCourses();
+        jensen.viewCourses();
+        trev.addCourse(course1);
+        trev.addCourse(course3);
+        jensen.addCourse(course2);
+        trev.displayInfo();
+        jensen.displayInfo();
+        
+        
+        
         studentMainMenu(s, bob);
 
     }
@@ -93,6 +97,4 @@ public class Main {
             }
         }
     }
-
-    
 }
