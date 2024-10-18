@@ -12,7 +12,9 @@ public class Main {
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
         
-        try {
+
+
+
             Campus sjsu = new Campus("SJSU");
             Department cs = new Department("CS", sjsu);
             Department business = new Department("Business", sjsu);
@@ -63,6 +65,7 @@ public class Main {
         } finally {
             s.close();
         }
+
     }
 
     public static void studentMainMenu(Scanner s, Student student) {

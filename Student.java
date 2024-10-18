@@ -1,4 +1,4 @@
-import java.util.Arrays;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -85,6 +85,9 @@ public class Student implements Person {
             getCurrentCredits();
         }
     }
+    public void addRegisteredCourse(Course course) {
+        currentEnrolledCourses.add(course);
+    }
 
     public ArrayList<Course> getCurrentEnrolledCourses() {
         return new ArrayList<>(currentEnrolledCourses);
@@ -159,7 +162,6 @@ public class Student implements Person {
                 String willRegister = scanner.next();
                 if(willRegister.equals("y")){
                     this.registerClass(selectedCourse);
-                    currentEnrolledCourses.add(selectedCourse);
                     choice = 0;
                 }
                 else if(willRegister.equals("n")){

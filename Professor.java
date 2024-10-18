@@ -2,8 +2,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 
-
-
 public class Professor implements Person {
 	
   	private String name;
