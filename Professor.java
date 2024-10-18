@@ -1,3 +1,4 @@
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 
@@ -8,12 +9,15 @@ public class Professor implements Person {
 	private int profID;
 	private Department dep;
 	private String email;
+	private ArrayList<LocalDateTime> officeHours;
 
 	
-	public Professor(String name, int id, String email) {
+	public Professor(String name, int id, String email, Department dep) {
 		this.name = name;
 		this.coursesTaught = new ArrayList<>();
+		this.officeHours = new ArrayList<>();
 		this.email = email;
+		this.dep = dep;
 	}
 	
 	public void printEmail(){
@@ -41,14 +45,35 @@ public class Professor implements Person {
 	}
 	
 	public void viewCourses() {
-		System.out.println("All courses taught by Professor " + name + ": ");
-		for(Course course: coursesTaught) {
-			System.out.println(course.getTitle());
+        if (coursesTaught.isEmpty()) {
+            System.out.println("Professor " + name + " is not currently teaching any courses.");
+        } else {
+            System.out.println("Courses taught by Professor " + name + ": ");
+            for (Course course : coursesTaught) {
+                System.out.println(course.getTitle());
+            }
+        }
+    }
+	
+	public void scheduleOfficeHours(LocalDateTime time) {
+	       officeHours.add(time);
+	       System.out.println("Office hours scheduled at: " + time);
+	   }
+		
+		public void viewOfficeHours() {
+	       System.out.println("Office hours for Professor " + getName() + ":");
+	       for (LocalDateTime time : officeHours) {
+	           System.out.println(time);
+	       }
 		}
-	}
+
 	
 	public String getName() {
 		return name;
+	}
+	
+	public void setName(String n) {
+		name = n;
 	}
 	public Department getDepartment(){
         return dep;
@@ -71,8 +96,7 @@ public class Professor implements Person {
 	public void displayInfo() {
 		System.out.println("Professor Name: " + getName());
     	System.out.println("Professor's ID: " + getEmployeeID());
-	
-		
+    	System.out.println("Email: " + email);
+    	System.out.println("Department: " + getDepartment().getName());
 	  }
 }
-
