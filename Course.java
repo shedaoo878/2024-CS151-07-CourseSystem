@@ -14,7 +14,7 @@ public class Course implements Registerable{
     
 
     public Course(Professor professor, int credits,
-                  Department department, int maxAllowed, String title, boolean available, ArrayList<String> enrolledStudents) {
+                  Department department, int maxAllowed, String title, boolean available, ArrayList<String> enrolledStudents, String classroom) {
         this.professor = professor;
         this.allowedMajors = new ArrayList<String>();
         this.credits = credits;
@@ -23,6 +23,7 @@ public class Course implements Registerable{
         this.title = title;
         this.enrolledStudents = new ArrayList<Student>();
         this.currentNumStudents = 0;
+        this.classroom = classroom;
     }
 
     // getter and setter methods
@@ -109,7 +110,6 @@ public class Course implements Registerable{
             return;
         }
         if (student != null && !enrolledStudents.contains(student) && enrolledStudents.size() < maxAllowed && student.getDepartment() == this.department) {
-            student.addRegisteredCourse(this);
             enrolledStudents.add(student);  
             currentNumStudents++;
             System.out.println(student.getName() + " is now registered for " + this.getTitle());
