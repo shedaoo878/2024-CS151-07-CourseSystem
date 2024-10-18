@@ -13,21 +13,37 @@ public class Department implements Admin {
         this.studentsInDep = new ArrayList<>();
         this.profsInDep = new ArrayList<>();
         this.campus = campus;
+        campus.addDepartment(this);
     }
 
     public void addCourse(Course c) {
-        c.setDepartment(this);
-        coursesInDep.add(c);
+        if (!coursesInDep.contains(c)) {
+            c.setDepartment(this);
+            coursesInDep.add(c);
+            System.out.println("Course " + c.getTitle() + " added to department " + depName);
+        } else {
+            System.out.println("Course " + c.getTitle() + " is already in the department.");
+        }
     }
 
     public void addStudent(Student s) {
-        s.setDepartment(this);
-        studentsInDep.add(s);
+        if (!studentsInDep.contains(s)) {
+            s.setDepartment(this);
+            studentsInDep.add(s);
+            System.out.println("Student " + s.getName() + " added to department " + depName);
+        } else {
+            System.out.println("Student " + s.getName() + " is already in the department.");
+        }
     }
 
     public void addProf(Professor p) {
-        p.setDepartment(this);
-        profsInDep.add(p);
+        if (!profsInDep.contains(p)) {
+            p.setDepartment(this);
+            profsInDep.add(p);
+            System.out.println("Professor " + p.getName() + " added to department " + depName);
+        } else {
+            System.out.println("Professor " + p.getName() + " is already in the department.");
+        }
     }
 
     public String getName() {
@@ -35,47 +51,50 @@ public class Department implements Admin {
     }
 
     public ArrayList<Course> getCoursesInDep() {
-        return coursesInDep;
+        return new ArrayList<>(coursesInDep);
     }
 
     public ArrayList<Student> getStudentsInDep() {
-        return studentsInDep;
+        return new ArrayList<>(studentsInDep);
     }
 
     public ArrayList<Professor> getProfsInDep() {
-        return profsInDep;
+        return new ArrayList<>(profsInDep);
     }
 
     @Override
     public void approveCourse(Course course) {
         addCourse(course);
-        System.out.println("Course " + course.getTitle() + " has been approved and added to the department.");
+        System.out.println("Course " + course.getTitle() + " has been approved and added to the department " + depName);
     }
 
     @Override
     public void removeStudent(Student student) {
         if (studentsInDep.remove(student)) {
-            System.out.println("Student " + student.getName() + " has been removed from the department.");
+            System.out.println("Student " + student.getName() + " has been removed from the department " + depName);
         } else {
-            System.out.println("Student " + student.getName() + " not found in the department.");
+            System.out.println("Student " + student.getName() + " not found in the department " + depName);
         }
     }
 
     @Override
-    public void viewDepartmentDetails() {
+    public void viewDepartmentInfo() {
         System.out.println("Department Name: " + depName);
         System.out.println("Courses Offered: ");
         for (Course course : coursesInDep) {
             System.out.println(" - " + course.getTitle());
         }
-        System.out.println("Students Enrolled: ");
-        for (Student student : studentsInDep) {
-            System.out.println(" - " + student.getName());
-        }
-        System.out.println("Professors in Department: ");
-        for (Professor prof : profsInDep) {
-            System.out.println(" - " + prof.getName());
-        }
+        System.out.println("Students Enrolled: " + studentsInDep.size());
+        System.out.println("Professors in Department: " + profsInDep.size());
     }
-    
+
+    public Campus getCampus() {
+        return campus;
+    }
+
+    @Override
+    public String toString() {
+        return "Department: " + depName + " (Courses: " + coursesInDep.size() + 
+               ", Students: " + studentsInDep.size() + ", Professors: " + profsInDep.size() + ")";
+    }
 }
