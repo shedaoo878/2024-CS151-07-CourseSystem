@@ -14,13 +14,16 @@ public class Course implements Registerable{
     private int currentNumStudents;
     private HashMap<Student, Character> gradesList;
     private ArrayList<Student> admins;
+    private Campus campus;
 
     public Course(Professor professor, int credits,
-                  Department department, int maxAllowed, String title, ArrayList<String> enrolledStudents, int id) {
+                  Department department, int maxAllowed, String title, ArrayList<String> enrolledStudents, int id, Campus campus) {
         this.professor = professor;
         this.allowedMajors = new ArrayList<String>();
         this.credits = credits;
         this.department = department;
+        department.addCourse(this);
+
         this.maxAllowed = maxAllowed;
         this.title = title;
         this.id = id;
@@ -30,6 +33,8 @@ public class Course implements Registerable{
         for(Student s : this.enrolledStudents){
             gradesList.put(s, 'Z');
         }
+        this.campus = campus;
+        campus.addCourse(this);
 
     }
 
@@ -65,9 +70,14 @@ public class Course implements Registerable{
 
     public Department getDepartment() {
         return department;
+
     }
-    public void setDepartment(Department department) {
-        this.department = department;
+    public void setDepartment(Department oldDep, Department newDepartment) {
+
+        oldDep.removeCourse(this);
+        newDepartment.addCourse(this);
+        this.department = newDepartment;
+        System.out.println("Course " + title + " is now part of Department " + department.getName());
     }
 
     public int getMaxAllowed() {

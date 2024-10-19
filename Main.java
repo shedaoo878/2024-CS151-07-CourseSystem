@@ -27,10 +27,12 @@ public class Main {
             Professor sessions = new Professor("Dr. Sessions", 3, "wwyih", business, sjsu);
             Professor taylor = new Professor("Dr. Taylor", 4, "wwww434", cs, sjsu);
             
-            Course course1 = new Course(taylor, 3, cs, 30, "CS146", new ArrayList<String>(), 1);
-            Course course2 = new Course(jensen, 3, business, 30, "BUS4118D", new ArrayList<String>(), 2);
-            Course course3 = new Course(trev, 3, cs, 30, "CS151", new ArrayList<String>(), 3);
-            Course course4 = new Course(sessions, 3, business, 30, "BUS4119B", new ArrayList<String>(), 4);
+
+            Course course1 = new Course(trev, 3, cs, 30, "CS146", new ArrayList<String>(), 1, sjsu);
+            Course course2 = new Course(jensen, 3, business, 30, "BUS4118D", new ArrayList<String>(), 2, sjsu);
+            Course course3 = new Course(trev, 3, cs, 30, "CS151", new ArrayList<String>(), 3, sjsu);
+
+
             courses.add(course1);
             courses.add(course2);
             courses.add(course3);
@@ -209,8 +211,8 @@ public class Main {
 					break;
 				case 3:
 					System.out.println("\nCourses in this department: ");
-					for (Course course : courses) {
-						course.getTitle();
+					for (Course course : department.getCoursesInDep()) {
+						System.out.println(course.getTitle());
 					}
 					break;
 				case 4:
