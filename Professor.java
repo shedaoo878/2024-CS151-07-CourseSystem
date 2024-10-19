@@ -20,6 +20,7 @@ public class Professor extends Person implements Admin{
 		this.officeHours = new ArrayList<>();
 		this.email = email;
 		this.dep = dep;
+		dep.addProf(this);
 		this.campus = campus;
 		campus.addPerson(this);
 	}

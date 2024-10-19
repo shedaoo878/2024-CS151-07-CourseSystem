@@ -2,66 +2,45 @@ School Course - Student Management System in Java
 
 Authors: Joshua Gonzalez, Shivansh Hedaoo, Santhosh Ravindrabharathy, Henry To
 
-Project Specification - Major Practical Introduction
-The School Course project is a student management system designed to facilitate the organization and management of course offerings, student enrollments, and faculty assignments. The system consists of several classes, including Department, Course, Student, and Professor. This management system allows users to perform operations such as adding and viewing courses, enrolling students, and managing faculty assignments.
+Project Overiview
+The School Course project is a campus management system designed to organize and manage courses, student enrollments, and faculty in one organized OOP system. The system consists of several classes, the main ones including Department, Course, Student, and Professor. This management system allows users to perform operations such as adding and viewing courses, enrolling for classes, and managing admin privelages.
 
 The project leverages Object-Oriented Programming principles, including inheritance and polymorphism, to create a structured and reusable codebase. Comprehensive testing ensures functionality and reliability throughout the system.
 
-Design Description
-Assessment Concepts
-Classes: The primary classes include Department, Course, Student, and Professor. Each class encapsulates specific functionalities and attributes related to the system.
-Objects: Instances of the classes represent individual departments, courses, students, and professors.
-User Input and Output
-I/O of Different Data Types:
-Command-line interface for user interaction.
-The system prompts users for input to navigate menus and perform actions, such as enrolling in courses or adding new faculty members.
-Object-Oriented Programming and Design
-Inheritance:
+Design ------------------------
 
-The project employs inheritance to model relationships between classes, such as Professor and Student, both of which can be associated with a Department.
-Polymorphism:
+Classes: The classes involved are Campus, Department, Course, Club, Student, and Professor. 
 
-The system utilizes polymorphism to allow methods to operate on objects of different classes through a common interface.
-Abstract Classes and Interfaces:
+The campus class contains organized lists of the departments, clubs, courses, and people on the campus and makes it extremely easy to find these objects within the campus system. 
 
-Abstract classes can be used to define common behaviors for related classes (e.g., a base class for all users with common attributes).
+The department class contains information on the courses, students, and professors in the department. It makes it easy to add/remove these objects as well as change the department of a course or student.
 
-Class Diagram:
+The student class contains information on the student's name, id, email, and the courses they are enrolled in. It makes it easy to add/remove courses and view all courses a student is enrolled in.
+
+The professor class contains similar basic info, as well as the courses they teach. They are also able to set grades for students as well as schedule office hours.
+
+The course and club classes contain basic information along with ways to register and drop students from the course or club.
+
+
+A Person abstract class is also included, which is utilized by the Student and Professor classes to simplify common methods and attributes such as name, id, email, and department, all of which any individual in the system should have.
+
+A Registrable interface is utilized by the Course and Club classes to reduce redundancy when students need to register for one of these events. They incorporate a register and a drop method.
+
+A second Admin interface is utilized to provide common privalges to any Person in the system who is set as an admin. All professor are set as admins by default, but can assign other students as admins as well. These admins are given the privaleges to set student grades, and add other admins.
+
+
+Class Diagram representing the relationships between classes:
 
 ![cs151diagram](https://github.com/user-attachments/assets/e3a2735e-984f-4f4c-8eee-a96b18aeabfe)
 
-Class Descriptions
 
 
-Department:
-
-This class represents an academic department, containing courses, students, and professors. It provides methods for adding and managing courses and students.
-
-Course:
-
-The Course class represents an academic course, detailing attributes such as course title, credits, and the associated department.
-
-Student:
-
-This class simulates student profiles, including attributes like name, student ID, and enrolled courses. It manages course enrollment and student-specific functionalities.
-
-Professor:
-
-The Professor class represents faculty members, including their names, subjects taught, and the department they belong to. It allows professors to interact with the courses and students in their department.
-
-User Interface:
-
-Users interact with the system via a command-line interface, where they can select options to view department info, enroll in courses, and manage student records.
+To run the program, certain test objects have already been created. Simply run the main method, and follow the prompts to navigate through the system. 
+A campus object has been created, with two departments, and several courses, clubs, students, and professors. 
 
 
-Main Function Test Cases:
+Joshua - Worked on the Professor and Main method testing.
+Santhosh - Worked on the Course/club classes and Unit Testing.
+Shivansh - Worked on the Interfaces and the Department class.
+Henry - Worked on the Campus and the Student classes.
 
-1. Start the program and view department info.
-
-2. Add a new course to the department.
-
-3. Enroll a student in a course and verify enrollment.
-
-4. Add a professor and ensure they are linked to the correct department.
-
-5. Remove a student and verify their removal from the department.

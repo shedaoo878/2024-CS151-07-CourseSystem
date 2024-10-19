@@ -87,7 +87,10 @@ public class Department {
 
     public void changePersonDepartment(int id){
         Person person = campus.getPerson(id);
-        if(person != null){
+        if(this.studentsInDep.contains(person) || this.profsInDep.contains(person)){
+            System.out.println( "This Person is already in Department " + depName);
+        }
+       else if(person != null){
             person.setDepartment(this);
             System.out.println(person.getName() + " is now part of Department " + depName);
         }else{
