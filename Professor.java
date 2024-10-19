@@ -14,6 +14,7 @@ public class Professor extends Person implements Admin{
 
 	
 	public Professor(String name, int id, String email, Department dep, Campus campus) {
+		super(name, id, email, dep, campus);
 		this.name = name;
 		this.coursesTaught = new ArrayList<>();
 		this.officeHours = new ArrayList<>();

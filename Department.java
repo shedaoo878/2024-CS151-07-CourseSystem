@@ -82,4 +82,14 @@ public class Department {
             System.out.println("Student/Professor withID " + id + " is not found.");
         }
     }
+
+    public void changeCourseDepartment(int id){
+        Course course = campus.findCourseById(id);
+        if(course != null){
+            course.setDepartment(this);
+        }
+        else{
+            System.out.println("Course with ID " + id + " is not found.");
+        }
+    }
 }

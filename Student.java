@@ -15,9 +15,10 @@ public class Student extends Person implements Admin {
     private Campus campus;
     final int MAXCREDITS = 15;
     final int MINCREDITS = 12;
-    private boolean isAdmin;
-    
+
+
     public Student(String name, int grade, Department department, int studentId, String email, Campus campus) {
+        super(name, studentId, email, department, campus);
         this.name = name;
         this.grade = grade;
         this.studentId = studentId;
@@ -27,9 +28,10 @@ public class Student extends Person implements Admin {
         this.clubs = new ArrayList<>();
         this.dep = department;
         this.campus = campus;
+        campus.addPerson(this);
     }
     public Student(String name, int grade, int studentId, String email, Campus campus) {
-        this.name = name;
+        super(name, studentId, email, null, campus);
         this.grade = grade;
         this.studentId = studentId;
         this.email = email;

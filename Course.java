@@ -9,19 +9,21 @@ public class Course implements Registerable{
     private Department department;
     private int maxAllowed;
     private String title;
+    private int id;
     private ArrayList<Student> enrolledStudents;
     private int currentNumStudents;
     private HashMap<Student, Character> gradesList;
     private ArrayList<Student> admins;
 
     public Course(Professor professor, int credits,
-                  Department department, int maxAllowed, String title, ArrayList<String> enrolledStudents) {
+                  Department department, int maxAllowed, String title, ArrayList<String> enrolledStudents, int id) {
         this.professor = professor;
         this.allowedMajors = new ArrayList<String>();
         this.credits = credits;
         this.department = department;
         this.maxAllowed = maxAllowed;
         this.title = title;
+        this.id = id;
         this.enrolledStudents = new ArrayList<Student>();
         this.currentNumStudents = 0;
         this.gradesList = new HashMap<Student, Character>();
@@ -96,6 +98,9 @@ public class Course implements Registerable{
 
     public int getCurrentNumStudents(){
         return currentNumStudents;
+    }
+    public int getId(){
+        return id;
     }
     public Student getStudent(int studentID){
         for(Student s : enrolledStudents){

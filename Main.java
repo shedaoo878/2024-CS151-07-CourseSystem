@@ -20,9 +20,9 @@ public class Main {
             Professor trev = new Professor("Dr. Trev", 1, "wwww", cs, sjsu);
             Professor jensen = new Professor("Dr. Jensen", 2, "wwty", business, sjsu);
             
-            Course course1 = new Course(trev, 3, cs, 30, "CS146", new ArrayList<String>());
-            Course course2 = new Course(jensen, 3, business, 30, "BUS4118D", new ArrayList<String>());
-            Course course3 = new Course(trev, 3, cs, 30, "CS151", new ArrayList<String>());
+            Course course1 = new Course(trev, 3, cs, 30, "CS146", new ArrayList<String>(), 1);
+            Course course2 = new Course(jensen, 3, business, 30, "BUS4118D", new ArrayList<String>(), 2);
+            Course course3 = new Course(trev, 3, cs, 30, "CS151", new ArrayList<String>(), 3);
             courses.add(course1);
             courses.add(course2);
             courses.add(course3);
@@ -57,13 +57,20 @@ public class Main {
             jensen.displayInfo();
             
 
-            System.out.println("Enter student menu [1] or the professor menu [2]: ");
+            System.out.println("----------------");
+            System.out.println("Student Menu [1] - Professor Menu [2] - Department Menu [3]");
             int choice = s.nextInt();
             if(choice == 1){
                 studentMainMenu(s, bob);
             }
             else if(choice == 2){
                 professorMainMenu(s, trev);
+            }
+            else if(choice == 3){
+                departmentMainMenu(s, cs);
+            }
+            else{
+                System.out.println("Invalid choice. Please enter a number between 1 and 3.");
             }
 
         } catch (Exception e) {
@@ -174,9 +181,9 @@ public class Main {
 					break;
 				case 2:
 					System.out.println("You have selected to switch a course's department. Enter the ID of the course: ");
-					//int courseId = s.nextInt();
+					int courseId = s.nextInt();
 					s.nextLine();
-					//department.changeCourseDepartment(courseId);
+					department.changeCourseDepartment(courseId);
 					break;
 				case 3:
 					System.out.println("\nCourses in this department: ");
@@ -201,21 +208,5 @@ public class Main {
 		}
 	}
 
-	private static Course findCourseByTitle(String title) {
-		for (Course course : courses) {
-			if (course.getTitle().equalsIgnoreCase(title)) {
-				return course;
-			}
-		}
-		return null;
-	}
-
-	private static Student findStudentByName(String name, Department department) {
-		for (Student student : department.getStudentsInDep()) {
-			if (student.getName().equalsIgnoreCase(name)) {
-				return student;
-			}
-		}
-		return null;
-}
+	
 }
