@@ -16,15 +16,21 @@ public class Club implements Registerable {
         this.maxMembers = maxMembers;
         campus.addClub(this);
     }
-
+    
+	public Club(String clubName, Campus campus) {
+		this.clubName = clubName;
+		this.description = "";
+		this.members = new ArrayList<>();
+		this.campus = campus;
+		this.maxMembers = 10;
+		campus.addClub(this);
+	}
    
     @Override
     public void register(Student student) {
         if (student != null && !members.contains(student) && members.size() < maxMembers) {
             members.add(student);
             student.addToClubs(this);
-            // Uncomment the following line if the Student class has a joinClub method
-            // student.joinClub(this);
             System.out.println(student.getName() + " has been registered for the club: " + this.getClubName());
         } else if (members.contains(student)) {
             System.out.println(student.getName() + " is already a member of the club: " + this.getClubName());
@@ -39,8 +45,6 @@ public class Club implements Registerable {
     public void drop(Student student) {
         if (student != null && members.contains(student)) {
             members.remove(student);
-            // Uncomment the following line if the Student class has a leaveClub method
-            // student.leaveClub(this);
             System.out.println(student.getName() + " has been dropped from the club: " + this.getClubName());
         } else if (!members.contains(student)) {
             System.out.println(student.getName() + " is not a member of the club: " + this.getClubName());
