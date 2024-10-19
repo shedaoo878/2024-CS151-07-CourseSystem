@@ -173,5 +173,13 @@ public class Campus {
         }
         return null;
     }
+    public Department findDepartmentByName(String depName){
+        for(Department d : departments){
+            if(d.getName().equals(depName)){
+                return d;
+            }
+        }
+        return null;
+    }
 
 }

@@ -16,13 +16,15 @@ public class Main {
             Campus sjsu = new Campus("SJSU");
             Department cs = new Department("CS", sjsu);
             Department business = new Department("Business", sjsu);
+
             Student bob = new Student("Bob", 3, cs, 1, "ww", sjsu);
             Professor trev = new Professor("Dr. Trev", 1, "wwww", cs, sjsu);
             Professor jensen = new Professor("Dr. Jensen", 2, "wwty", business, sjsu);
             
-            Course course1 = new Course(trev, 3, cs, 30, "CS146", new ArrayList<String>(), 1);
-            Course course2 = new Course(jensen, 3, business, 30, "BUS4118D", new ArrayList<String>(), 2);
-            Course course3 = new Course(trev, 3, cs, 30, "CS151", new ArrayList<String>(), 3);
+            Course course1 = new Course(trev, 3, cs, 30, "CS146", new ArrayList<String>(), 1, sjsu);
+            Course course2 = new Course(jensen, 3, business, 30, "BUS4118D", new ArrayList<String>(), 2, sjsu);
+            Course course3 = new Course(trev, 3, cs, 30, "CS151", new ArrayList<String>(), 3, sjsu);
+
             courses.add(course1);
             courses.add(course2);
             courses.add(course3);
@@ -187,8 +189,8 @@ public class Main {
 					break;
 				case 3:
 					System.out.println("\nCourses in this department: ");
-					for (Course course : courses) {
-						course.getTitle();
+					for (Course course : department.getCoursesInDep()) {
+						System.out.println(course.getTitle());
 					}
 					break;
 				case 4:

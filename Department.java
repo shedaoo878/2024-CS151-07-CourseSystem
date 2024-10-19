@@ -18,12 +18,15 @@ public class Department {
 
     public void addCourse(Course c) {
         if (!coursesInDep.contains(c)) {
-            c.setDepartment(this);
             coursesInDep.add(c);
             System.out.println("Course " + c.getTitle() + " added to department " + depName);
         } else {
             System.out.println("Course " + c.getTitle() + " is already in the department.");
         }
+    }
+
+    public void removeCourse(Course c) {
+        coursesInDep.remove(c);
     }
 
     public void addStudent(Student s) {
@@ -85,8 +88,11 @@ public class Department {
 
     public void changeCourseDepartment(int id){
         Course course = campus.findCourseById(id);
-        if(course != null){
-            course.setDepartment(this);
+        if(this.coursesInDep.contains(course)){
+            System.out.println("This course is already in Department " + depName);
+        }
+        else if(course != null){
+            course.setDepartment(course.getDepartment(), this);
         }
         else{
             System.out.println("Course with ID " + id + " is not found.");
