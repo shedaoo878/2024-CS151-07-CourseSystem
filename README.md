@@ -28,7 +28,8 @@ Abstract classes can be used to define common behaviors for related classes (e.g
 
 Class Diagram
 
-![alt text][(http://url/to/img.png)](https://cdn.discordapp.com/attachments/1297021600113365002/1297070104718348298/image.png?ex=6714962b&is=671344ab&hm=e963e1eb497d88940a46f6ae466fe889ca1a645f539b260280a2a6119d56e2fb&)
+![cs151diagram](https://github.com/user-attachments/assets/e3a2735e-984f-4f4c-8eee-a96b18aeabfe)
+
 Class Descriptions
 Department
 This class represents an academic department, containing courses, students, and professors. It provides methods for adding and managing courses and students.
