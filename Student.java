@@ -27,6 +27,7 @@ public class Student extends Person implements Admin {
         this.courseCredits = 0;
         this.clubs = new ArrayList<>();
         this.dep = department;
+        department.addStudent(this);
         this.campus = campus;
         campus.addPerson(this);
     }

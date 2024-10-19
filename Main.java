@@ -47,11 +47,12 @@ public class Main {
             clubs.add(club3);
             clubs.add(club4);
             
-            LocalDateTime LDT1 = LocalDateTime.of(2024, 10, 20, 14, 0);
-            LocalDateTime LDT2 = LocalDateTime.of(2024, 10, 22, 14, 0);
-            LocalDateTime LDT3 = LocalDateTime.of(2024, 10, 20, 15, 30);
-            LocalDateTime LDT4 = LocalDateTime.of(2024, 10, 22, 15, 30);
+            // LocalDateTime LDT1 = LocalDateTime.of(2024, 10, 20, 14, 0);
+            // LocalDateTime LDT2 = LocalDateTime.of(2024, 10, 22, 14, 0);
+            // LocalDateTime LDT3 = LocalDateTime.of(2024, 10, 20, 15, 30);
+            // LocalDateTime LDT4 = LocalDateTime.of(2024, 10, 22, 15, 30);
             
+<<<<<<< Updated upstream
             trev.scheduleOfficeHours(LDT1);
             trev.scheduleOfficeHours(LDT2);
             jensen.scheduleOfficeHours(LDT3);
@@ -60,6 +61,12 @@ public class Main {
             taylor.scheduleOfficeHours(LDT2);
             sessions.scheduleOfficeHours(LDT3);
             sessions.scheduleOfficeHours(LDT4);
+=======
+            // trev.scheduleOfficeHours(LDT1);
+            // trev.scheduleOfficeHours(LDT2);
+            // jensen.scheduleOfficeHours(LDT3);
+            // jensen.scheduleOfficeHours(LDT4);
+>>>>>>> Stashed changes
             
             trev.viewOfficeHours();
             jensen.viewOfficeHours();
@@ -75,10 +82,14 @@ public class Main {
             jensen.addCourse(course2);
             sessions.addCourse(course4);
             
+<<<<<<< Updated upstream
             trev.displayInfo();
             jensen.displayInfo();
             taylor.displayInfo();
             sessions.displayInfo();
+=======
+    
+>>>>>>> Stashed changes
             
 
             System.out.println("----------------");
