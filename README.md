@@ -28,7 +28,7 @@ Abstract classes can be used to define common behaviors for related classes (e.g
 
 Class Diagram:
 
-![image](https://github.com/user-attachments/assets/b470f04b-2183-4333-ab6a-95ab9a218331)
+![image]([https://github.com/user-attachments/assets/b470f04b-2183-4333-ab6a-95ab9a218331](https://github.com/shedaoo878/2024-CS151-07-CourseSystem/blob/1daed41f56907cec9170e0afdbbe8609ca1763a2/image.png))
 
 
 Class Descriptions
