@@ -47,10 +47,10 @@ public class Main {
             clubs.add(club3);
             clubs.add(club4);
             
-            LocalDateTime LDT1 = LocalDateTime.of(2024, 10, 20, 14, 0);
-            LocalDateTime LDT2 = LocalDateTime.of(2024, 10, 22, 14, 0);
-            LocalDateTime LDT3 = LocalDateTime.of(2024, 10, 20, 15, 30);
-            LocalDateTime LDT4 = LocalDateTime.of(2024, 10, 22, 15, 30);
+            // LocalDateTime LDT1 = LocalDateTime.of(2024, 10, 20, 14, 0);
+            // LocalDateTime LDT2 = LocalDateTime.of(2024, 10, 22, 14, 0);
+            // LocalDateTime LDT3 = LocalDateTime.of(2024, 10, 20, 15, 30);
+            // LocalDateTime LDT4 = LocalDateTime.of(2024, 10, 22, 15, 30);
             
 <<<<<<< Updated upstream
             trev.scheduleOfficeHours(LDT1);
