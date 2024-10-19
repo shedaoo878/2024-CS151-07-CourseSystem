@@ -1,8 +1,9 @@
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Student implements Person {
+public class Student extends Person implements Admin {
     private String name;
     private int grade;
     private int studentId;
@@ -14,8 +15,10 @@ public class Student implements Person {
     private Campus campus;
     final int MAXCREDITS = 15;
     final int MINCREDITS = 12;
-    
+
+
     public Student(String name, int grade, Department department, int studentId, String email, Campus campus) {
+        super(name, studentId, email, department, campus);
         this.name = name;
         this.grade = grade;
         this.studentId = studentId;
@@ -25,7 +28,20 @@ public class Student implements Person {
         this.clubs = new ArrayList<>();
         this.dep = department;
         this.campus = campus;
+        campus.addPerson(this);
     }
+    public Student(String name, int grade, int studentId, String email, Campus campus) {
+        super(name, studentId, email, null, campus);
+        this.grade = grade;
+        this.studentId = studentId;
+        this.email = email;
+        this.currentEnrolledCourses = new ArrayList<Course>();
+        this.courseCredits = 0;
+        this.clubs = new ArrayList<>();
+        this.dep = null;
+        this.campus = campus;
+    }
+    
 
     @Override
     public String getName() {
@@ -40,9 +56,7 @@ public class Student implements Person {
         return grade;
     }
 
-    public void setGrade(int grade) {
-        this.grade = grade;
-    }
+    
 
     public Department getDepartment(){
         return dep;
@@ -84,6 +98,9 @@ public class Student implements Person {
             getCurrentCredits();
         }
     }
+    public void addRegisteredCourse(Course course) {
+        currentEnrolledCourses.add(course);
+    }
 
     public ArrayList<Course> getCurrentEnrolledCourses() {
         return new ArrayList<>(currentEnrolledCourses);
@@ -100,6 +117,7 @@ public class Student implements Person {
         System.out.println();
     }
     
+    @Override
     public void displayInfo() {
         System.out.println("Student Information for " + name + " ------------");
         System.out.println("Student ID: " + studentId);
@@ -126,21 +144,21 @@ public class Student implements Person {
                 System.out.println(" -- " + club.getClubName());
             }
         }
-        System.out.println("--------------------------------------------");
+        System.out.println();
     }
 
     public Campus getCampus() {
         return campus;
     }
 
-    public List<Club> getClubs() {
-        return new ArrayList<>(clubs);
+    public void addToClubs(Club club) {
+        clubs.add(club);
     }
 
     public void addClasses(Scanner scanner, List<Course> availableCourses) {
         System.out.println("Available Courses:");
         for (int i = 0; i < availableCourses.size(); i++) {
-            System.out.println((i + 1) + ". " + availableCourses.get(i).getTitle());
+            System.out.println((i + 1) + ") " + availableCourses.get(i).getTitle());
         }
         
         System.out.print("Enter the number of a course to view info and register (enter 0 to exit to main menu): ");
@@ -158,7 +176,6 @@ public class Student implements Person {
                 String willRegister = scanner.next();
                 if(willRegister.equals("y")){
                     this.registerClass(selectedCourse);
-                    currentEnrolledCourses.add(selectedCourse);
                     choice = 0;
                 }
                 else if(willRegister.equals("n")){
@@ -200,14 +217,45 @@ public class Student implements Person {
 
             if (response.equals("y")) {
                 selectedClub.register(this);
-                clubs.add(selectedClub);
-            } else if (response.equals("n")) {
+            } 
+            else if (response.equals("n")) {
                 joinClubs(s, availableClubs);
-            } else {
+            }   
+            else {
                 System.out.println("Invalid input.");
             }
         } else {
             System.out.println("Invalid choice. Please try again.");
+        }
+    }
+    public boolean isAdmin(Course course) {
+        if(course.getAdmins().contains(this)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    
+
+    @Override
+    public void addGrade(Student student, Course course, char grade) {
+        if(isAdmin(course)){    
+            course.setGrade(this,student, grade);
+        }else{
+            System.out.println("You are not an Admin");
+        }
+    }
+
+    @Override
+    public void addAdmin(Student student, Course course) {
+        System.out.println("Students are not authorized to add admins.");
+    }
+    public void printGrades(Course course){
+        if(course.getGrade(this) == 'Z'){
+            System.out.println("You have not been graded in this course yet.");
+        }else{
+            System.out.println("Grade in course " + course.getTitle() + "is: " + course.getGrade(this));
         }
     }
 }

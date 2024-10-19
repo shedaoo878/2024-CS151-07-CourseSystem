@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Department implements Admin {
+public class Department {
     private String depName;
     private ArrayList<Course> coursesInDep;
     private ArrayList<Student> studentsInDep;
@@ -62,31 +62,6 @@ public class Department implements Admin {
         return new ArrayList<>(profsInDep);
     }
 
-    @Override
-    public void approveCourse(Course course) {
-        addCourse(course);
-        System.out.println("Course " + course.getTitle() + " has been approved and added to the department " + depName);
-    }
-
-    @Override
-    public void removeStudent(Student student) {
-        if (studentsInDep.remove(student)) {
-            System.out.println("Student " + student.getName() + " has been removed from the department " + depName);
-        } else {
-            System.out.println("Student " + student.getName() + " not found in the department " + depName);
-        }
-    }
-
-    @Override
-    public void viewDepartmentInfo() {
-        System.out.println("Department Name: " + depName);
-        System.out.println("Courses Offered: ");
-        for (Course course : coursesInDep) {
-            System.out.println(" - " + course.getTitle());
-        }
-        System.out.println("Students Enrolled: " + studentsInDep.size());
-        System.out.println("Professors in Department: " + profsInDep.size());
-    }
 
     public Campus getCampus() {
         return campus;
@@ -96,5 +71,15 @@ public class Department implements Admin {
     public String toString() {
         return "Department: " + depName + " (Courses: " + coursesInDep.size() + 
                ", Students: " + studentsInDep.size() + ", Professors: " + profsInDep.size() + ")";
+    }
+
+    public void changePersonDepartment(int id){
+        Person person = campus.getPerson(id);
+        if(person != null){
+            person.setDepartment(this);
+            System.out.println(person.getName() + " is now part of Department " + depName);
+        }else{
+            System.out.println("Student/Professor withID " + id + " is not found.");
+        }
     }
 }

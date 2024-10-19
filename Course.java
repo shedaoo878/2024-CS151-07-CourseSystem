@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Course implements Registerable{
 
@@ -7,14 +8,14 @@ public class Course implements Registerable{
     private int credits;
     private Department department;
     private int maxAllowed;
-    private String classroom;
     private String title;
     private ArrayList<Student> enrolledStudents;
     private int currentNumStudents;
-    
+    private HashMap<Student, Character> gradesList;
+    private ArrayList<Student> admins;
 
     public Course(Professor professor, int credits,
-                  Department department, int maxAllowed, String title, boolean available, ArrayList<String> enrolledStudents, String classroom) {
+                  Department department, int maxAllowed, String title, ArrayList<String> enrolledStudents) {
         this.professor = professor;
         this.allowedMajors = new ArrayList<String>();
         this.credits = credits;
@@ -23,7 +24,11 @@ public class Course implements Registerable{
         this.title = title;
         this.enrolledStudents = new ArrayList<Student>();
         this.currentNumStudents = 0;
-        this.classroom = classroom;
+        this.gradesList = new HashMap<Student, Character>();
+        for(Student s : this.enrolledStudents){
+            gradesList.put(s, 'Z');
+        }
+
     }
 
     // getter and setter methods
@@ -70,12 +75,6 @@ public class Course implements Registerable{
         this.maxAllowed = maxAllowed;
     }
 
-    public String getClassroom() {
-        return classroom;
-    }
-    public void setClassroom(String classroom) {
-        this.classroom = classroom;
-    }
     public boolean isWaitlist() {
         return enrolledStudents.size() > maxAllowed;
     }
@@ -98,9 +97,20 @@ public class Course implements Registerable{
     public int getCurrentNumStudents(){
         return currentNumStudents;
     }
-
+    public Student getStudent(int studentID){
+        for(Student s : enrolledStudents){
+            if(s.getStudentId() == studentID){
+                return s;
+            }
+        }
+        return null;
+    }
+    
     public int getEnrolledStudents() {
         return enrolledStudents.size();
+    }
+    public ArrayList<Student> getEnrolledStudentsList(){
+        return enrolledStudents;
     }
 
     @Override
@@ -111,6 +121,7 @@ public class Course implements Registerable{
         }
         if (student != null && !enrolledStudents.contains(student) && enrolledStudents.size() < maxAllowed && student.getDepartment() == this.department) {
             enrolledStudents.add(student);  
+            student.addRegisteredCourse(this);
             currentNumStudents++;
             System.out.println(student.getName() + " is now registered for " + this.getTitle());
         } else if (enrolledStudents.contains(student)) {
@@ -142,8 +153,21 @@ public class Course implements Registerable{
         System.out.println("Credits: " + credits);
         System.out.println("Allowed Department: " + department.getName());
         System.out.println("Current capacity: " + maxAllowed);
-        System.out.println("Classroom: " + classroom);
         System.out.println("Current capacity: " + currentNumStudents + "/" + maxAllowed);
         System.out.println();
+    }
+
+    public void setGrade(Admin admin,Student student, char grade){
+        gradesList.put(student, grade);
+        System.out.println("Grade has been set to " + grade + "by an Admin");
+    }
+    public void addAdmin(Student student){
+        admins.add(student);
+    }
+    public ArrayList<Student> getAdmins(){
+        return admins;
+    }
+    public char getGrade(Student student){
+        return gradesList.get(student);
     }
 }
