@@ -25,8 +25,10 @@ The system utilizes polymorphism to allow methods to operate on objects of diffe
 Abstract Classes and Interfaces:
 
 Abstract classes can be used to define common behaviors for related classes (e.g., a base class for all users with common attributes).
+
 Class Diagram
 
+![alt text][(http://url/to/img.png)](https://cdn.discordapp.com/attachments/1297021600113365002/1297070104718348298/image.png?ex=6714962b&is=671344ab&hm=e963e1eb497d88940a46f6ae466fe889ca1a645f539b260280a2a6119d56e2fb&)
 Class Descriptions
 Department
 This class represents an academic department, containing courses, students, and professors. It provides methods for adding and managing courses and students.
