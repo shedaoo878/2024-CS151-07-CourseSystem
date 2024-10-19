@@ -1,7 +1,5 @@
 public interface Admin {
-	void approveCourse(Course course);
-
-	void removeStudent(Student student);
-
-	void viewDepartmentInfo();
+    public void addGrade(Student student, Course course, char grade);
+    public void addAdmin(Student student, Course course);
 }
+

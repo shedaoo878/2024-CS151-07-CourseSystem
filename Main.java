@@ -12,59 +12,66 @@ public class Main {
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
         
-        Campus sjsu = new Campus("SJSU");
-
-        Department cs = new Department("CS", sjsu);
-        Department business = new Department("Business", sjsu);
-
-        Student bob = new Student("Bob", 3, cs, 1, "ww", sjsu);
-        Professor trev = new Professor("trv", 1, "wwww");
-        Professor jensen = new Professor("Jensen", 2, "wwty");
-        
-        Course course1 = new Course(trev, 3, cs, 30,"CS146", true, new ArrayList<String>());
-        Course course2 = new Course(jensen, 3, business, 30, "BUS4118D", true, new ArrayList<String>());
-        Course course3 = new Course(trev, 3, cs, 30,"CS151", true, new ArrayList<String>());
-        courses.add(course1);
-        courses.add(course2);
-        courses.add(course3);
-
-        Club club1 = new Club("Robotics", "Builds robots and other stuff.", sjsu, 20);
-        Club club2 = new Club("OOP club", "We learn about OOP.", sjsu, 8);
-        Club club3 = new Club("MISA", "Learn about careers in MIS.", sjsu, 70);
-        clubs.add(club1);
-        clubs.add(club2);
-        clubs.add(club3);
-
-        studentMainMenu(s, bob);
-
-
-
+        try {
+            Campus sjsu = new Campus("SJSU");
+            Department cs = new Department("CS", sjsu);
+            Department business = new Department("Business", sjsu);
+            Student bob = new Student("Bob", 3, cs, 1, "ww", sjsu);
+            Professor trev = new Professor("Dr. Trev", 1, "wwww", cs);
+            Professor jensen = new Professor("Dr. Jensen", 2, "wwty", business);
+            
+            Course course1 = new Course(trev, 3, cs, 30, "CS146", new ArrayList<String>());
+            Course course2 = new Course(jensen, 3, business, 30, "BUS4118D", new ArrayList<String>());
+            Course course3 = new Course(trev, 3, cs, 30, "CS151", new ArrayList<String>());
+            courses.add(course1);
+            courses.add(course2);
+            courses.add(course3);
+            
+            Club club1 = new Club("Robotics", "Builds robots and other stuff.", sjsu, 20);
+            Club club2 = new Club("OOP club", "We learn about OOP.", sjsu, 8);
+            Club club3 = new Club("MISA", "Learn about careers in MIS.", sjsu, 70);
+            clubs.add(club1);
+            clubs.add(club2);
+            clubs.add(club3);
             
             LocalDateTime LDT1 = LocalDateTime.of(2024, 10, 20, 14, 0);
             LocalDateTime LDT2 = LocalDateTime.of(2024, 10, 22, 14, 0);
             LocalDateTime LDT3 = LocalDateTime.of(2024, 10, 20, 15, 30);
             LocalDateTime LDT4 = LocalDateTime.of(2024, 10, 22, 15, 30);
             
-        trev.scheduleOfficeHours(LDT1);
-        trev.scheduleOfficeHours(LDT2);
-        jensen.scheduleOfficeHours(LDT3);
-        jensen.scheduleOfficeHours(LDT4);
+            trev.scheduleOfficeHours(LDT1);
+            trev.scheduleOfficeHours(LDT2);
+            jensen.scheduleOfficeHours(LDT3);
+            jensen.scheduleOfficeHours(LDT4);
             
-        trev.viewOfficeHours();
-        jensen.viewOfficeHours();
-         trev.viewCourses();
-        jensen.viewCourses();
+            trev.viewOfficeHours();
+            jensen.viewOfficeHours();
+            trev.viewCourses();
+            jensen.viewCourses();
             
-        trev.addCourse(course1);
-        trev.addCourse(course3);
-        jensen.addCourse(course2);
+            trev.addCourse(course1);
+            trev.addCourse(course3);
+            jensen.addCourse(course2);
             
-        trev.displayInfo();
-        jensen.displayInfo();
+            trev.displayInfo();
+            jensen.displayInfo();
             
-            studentMainMenu(s, bob);
-        
 
+            System.out.println("Enter student menu [1] or the professor menu [2]: ");
+            int choice = s.nextInt();
+            if(choice == 1){
+                studentMainMenu(s, bob);
+            }
+            else if(choice == 2){
+                professorMainMenu(s, trev);
+            }
+
+        } catch (Exception e) {
+            System.out.println("An unexpected error occurred: " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            s.close();
+        }
     }
 
     public static void studentMainMenu(Scanner s, Student student) {
@@ -86,15 +93,19 @@ public class Main {
                 switch (choice) {
                     case 1:
                         student.printSchedule();
+                        System.out.println();
                         break;
                     case 2:
                         student.addClasses(s, courses);
+                        System.out.println();
                         break;
                     case 3:
                         student.joinClubs(s, clubs);
+                        System.out.println();
                         break;
                     case 4:
                         student.displayInfo();
+                        System.out.println();
                         break;
                     case 5:
                         exit = true;
@@ -102,14 +113,41 @@ public class Main {
                         break;
                     default:
                         System.out.println("Invalid choice. Please enter a number between 1 and 5.");
+                        System.out.println();
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Invalid input. Please enter a number.");
-                s.nextLine(); // Clears the invalid input
+                s.nextLine(); 
+                
             } catch (Exception e) {
                 System.out.println("An error occurred: " + e.getMessage());
                 e.printStackTrace();
             }
         }
+    }
+    public static void professorMainMenu(Scanner s, Professor professor){
+        boolean exit = false;
+        while (!exit) {
+            System.out.println("WELCOME TO THE PROFESSOR MAIN MENU");
+            System.out.println("1 - Course Management");
+            System.out.println("2 - View Info");
+            System.out.println("3 - Exit");
+            System.out.println();
+            System.out.print("Please enter your choice: ");
+            int choice = s.nextInt();
+            s.nextLine();
+
+            switch (choice) {
+                case 1:
+                    professor.professorCourseManagement(s, professor);
+                    break;
+                case 2:
+                    professor.displayInfo();
+                    break;
+                case 3:
+                    exit = true;
+                    break;
+            }
+        }   
     }
 }

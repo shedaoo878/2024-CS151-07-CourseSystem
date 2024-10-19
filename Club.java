@@ -22,6 +22,7 @@ public class Club implements Registerable {
     public void register(Student student) {
         if (student != null && !members.contains(student) && members.size() < maxMembers) {
             members.add(student);
+            student.addToClubs(this);
             // Uncomment the following line if the Student class has a joinClub method
             // student.joinClub(this);
             System.out.println(student.getName() + " has been registered for the club: " + this.getClubName());
