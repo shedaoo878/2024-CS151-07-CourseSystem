@@ -16,23 +16,34 @@ public class Main {
             Campus sjsu = new Campus("SJSU");
             Department cs = new Department("CS", sjsu);
             Department business = new Department("Business", sjsu);
+
             Student bob = new Student("Bob", 3, cs, 1, "ww", sjsu);
+            //Student max = new Student("Max", 1, cs, 1, "ww", sjsu);
+            //Student roger = new Student("Roger", 2, business, 1, "ww", sjsu);
+            //Student todd = new Student("Todd", 4, business, 1, "ww", sjsu);
+
             Professor trev = new Professor("Dr. Trev", 1, "wwww", cs, sjsu);
             Professor jensen = new Professor("Dr. Jensen", 2, "wwty", business, sjsu);
+            Professor sessions = new Professor("Dr. Sessions", 3, "wwyih", business, sjsu);
+            Professor taylor = new Professor("Dr. Taylor", 4, "wwww434", cs, sjsu);
             
-            Course course1 = new Course(trev, 3, cs, 30, "CS146", new ArrayList<String>(), 1);
+            Course course1 = new Course(taylor, 3, cs, 30, "CS146", new ArrayList<String>(), 1);
             Course course2 = new Course(jensen, 3, business, 30, "BUS4118D", new ArrayList<String>(), 2);
             Course course3 = new Course(trev, 3, cs, 30, "CS151", new ArrayList<String>(), 3);
+            Course course4 = new Course(sessions, 3, business, 30, "BUS4119B", new ArrayList<String>(), 4);
             courses.add(course1);
             courses.add(course2);
             courses.add(course3);
+            courses.add(course4);
             
             Club club1 = new Club("Robotics", "Builds robots and other stuff.", sjsu, 20);
             Club club2 = new Club("OOP club", "We learn about OOP.", sjsu, 8);
             Club club3 = new Club("MISA", "Learn about careers in MIS.", sjsu, 70);
+            Club club4 = new Club("Spartan Analytics", "Learn about careers in Business Analytics and Data Science.", sjsu, 70);
             clubs.add(club1);
             clubs.add(club2);
             clubs.add(club3);
+            clubs.add(club4);
             
             LocalDateTime LDT1 = LocalDateTime.of(2024, 10, 20, 14, 0);
             LocalDateTime LDT2 = LocalDateTime.of(2024, 10, 22, 14, 0);
@@ -43,18 +54,29 @@ public class Main {
             trev.scheduleOfficeHours(LDT2);
             jensen.scheduleOfficeHours(LDT3);
             jensen.scheduleOfficeHours(LDT4);
+            taylor.scheduleOfficeHours(LDT1);
+            taylor.scheduleOfficeHours(LDT2);
+            sessions.scheduleOfficeHours(LDT3);
+            sessions.scheduleOfficeHours(LDT4);
             
             trev.viewOfficeHours();
             jensen.viewOfficeHours();
             trev.viewCourses();
             jensen.viewCourses();
+            taylor.viewOfficeHours();
+            sessions.viewOfficeHours();
+            taylor.viewCourses();
+            sessions.viewCourses();
             
-            trev.addCourse(course1);
+            taylor.addCourse(course1);
             trev.addCourse(course3);
             jensen.addCourse(course2);
+            sessions.addCourse(course4);
             
             trev.displayInfo();
             jensen.displayInfo();
+            taylor.displayInfo();
+            sessions.displayInfo();
             
 
             System.out.println("----------------");
