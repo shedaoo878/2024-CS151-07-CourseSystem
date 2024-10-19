@@ -16,6 +16,14 @@ public class Campus {
         this.listOfPeople = new ArrayList<>();
     }
 
+     public Campus(String campusName, String location, ArrayList<Department> departments, ArrayList<Club> clubs, ArrayList<Course> courses) {
+        this.campusName = campusName;
+        this.location = location;
+        this.departments = departments;
+        this.clubs = clubs; 
+        this.courses = courses; 
+    }
+
     public void addDepartment(Department department) {
         if (!departments.contains(department)) {
             departments.add(department);
