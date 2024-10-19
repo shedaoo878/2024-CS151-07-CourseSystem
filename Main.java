@@ -12,8 +12,6 @@ public class Main {
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
         
-<<<<<<< HEAD
-<<<<<<< HEAD
         Campus sjsu = new Campus("SJSU");
 
         Department cs = new Department("CS", sjsu);
@@ -39,68 +37,34 @@ public class Main {
 
         studentMainMenu(s, bob);
 
-=======
-        try {
-=======
 
 
-
->>>>>>> 56248368bbf81df4e90de27086102f0addf19d3c
-            Campus sjsu = new Campus("SJSU");
-            Department cs = new Department("CS", sjsu);
-            Department business = new Department("Business", sjsu);
-            Student bob = new Student("Bob", 3, cs, 1, "ww", sjsu);
-            Professor trev = new Professor("Dr. Trev", 1, "wwww", cs);
-            Professor jensen = new Professor("Dr. Jensen", 2, "wwty", business);
-            
-            Course course1 = new Course(trev, 3, cs, 30, "CS146", true, new ArrayList<String>(), "Duncan Hall 412");
-            Course course2 = new Course(jensen, 3, business, 30, "BUS4118D", true, new ArrayList<String>(), "BBC 320");
-            Course course3 = new Course(trev, 3, cs, 30, "CS151", true, new ArrayList<String>(), "Duncan Hall 416");
-            courses.add(course1);
-            courses.add(course2);
-            courses.add(course3);
-            
-            Club club1 = new Club("Robotics", "Builds robots and other stuff.", sjsu, 20);
-            Club club2 = new Club("OOP club", "We learn about OOP.", sjsu, 8);
-            Club club3 = new Club("MISA", "Learn about careers in MIS.", sjsu, 70);
-            clubs.add(club1);
-            clubs.add(club2);
-            clubs.add(club3);
             
             LocalDateTime LDT1 = LocalDateTime.of(2024, 10, 20, 14, 0);
             LocalDateTime LDT2 = LocalDateTime.of(2024, 10, 22, 14, 0);
             LocalDateTime LDT3 = LocalDateTime.of(2024, 10, 20, 15, 30);
             LocalDateTime LDT4 = LocalDateTime.of(2024, 10, 22, 15, 30);
             
-            trev.scheduleOfficeHours(LDT1);
-            trev.scheduleOfficeHours(LDT2);
-            jensen.scheduleOfficeHours(LDT3);
-            jensen.scheduleOfficeHours(LDT4);
+        trev.scheduleOfficeHours(LDT1);
+        trev.scheduleOfficeHours(LDT2);
+        jensen.scheduleOfficeHours(LDT3);
+        jensen.scheduleOfficeHours(LDT4);
             
-            trev.viewOfficeHours();
-            jensen.viewOfficeHours();
-            trev.viewCourses();
-            jensen.viewCourses();
+        trev.viewOfficeHours();
+        jensen.viewOfficeHours();
+         trev.viewCourses();
+        jensen.viewCourses();
             
-            trev.addCourse(course1);
-            trev.addCourse(course3);
-            jensen.addCourse(course2);
+        trev.addCourse(course1);
+        trev.addCourse(course3);
+        jensen.addCourse(course2);
             
-            trev.displayInfo();
-            jensen.displayInfo();
+        trev.displayInfo();
+        jensen.displayInfo();
             
             studentMainMenu(s, bob);
-        } catch (Exception e) {
-            System.out.println("An unexpected error occurred: " + e.getMessage());
-            e.printStackTrace();
-        } finally {
-            s.close();
-        }
-<<<<<<< HEAD
->>>>>>> main
-=======
+        
 
->>>>>>> 56248368bbf81df4e90de27086102f0addf19d3c
     }
 
     public static void studentMainMenu(Scanner s, Student student) {
