@@ -1,6 +1,6 @@
 School Course - Student Management System in Java
 
-Authors: [Your Name] (Your Email) ; [Co-author's Name] (Co-author's Email) ; [Another Co-author's Name] (Another Co-author's Email)
+Authors: Joshua Gonzalez, Shivansh Hedaoo, Santhosh Ravindrabharathy, Henry To
 
 Project Specification - Major Practical Introduction
 The School Course project is a student management system designed to facilitate the organization and management of course offerings, student enrollments, and faculty assignments. The system consists of several classes, including Department, Course, Student, and Professor. This management system allows users to perform operations such as adding and viewing courses, enrolling students, and managing faculty assignments.
@@ -55,8 +55,13 @@ Users interact with the system via a command-line interface, where they can sele
 
 
 Main Function Test Cases:
-1.Start the program and view department info.
-2.Add a new course to the department.
-3.Enroll a student in a course and verify enrollment.
-4.Add a professor and ensure they are linked to the correct department.
-5.Remove a student and verify their removal from the department.
+
+1. Start the program and view department info.
+
+2. Add a new course to the department.
+
+3. Enroll a student in a course and verify enrollment.
+
+4. Add a professor and ensure they are linked to the correct department.
+
+5. Remove a student and verify their removal from the department.
