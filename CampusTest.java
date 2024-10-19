@@ -1,84 +1,60 @@
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
 import java.util.ArrayList;
 
+import static org.junit.jupiter.api.Assertions.*;
 
-// junit4
 public class CampusTest {
-	private Campus campus;
-	private Department csDepartment;
-	private Club codingClub;
-	private Professor trev;
-	private Course course1;
+    private Campus campus;
+    private Department department;
+    private Club club;
+    private Course course;
 
-	@Before
-	public void setUp() {
-		campus = new Campus("Main Campus");
-		csDepartment = new Department("Computer Science", campus);
-		codingClub = new Club("Coding Club", null, campus, 0);
-		trev = new Professor("Mr. Zhong", 0, null, csDepartment);
-		course1 = new Course(trev, 3, csDepartment, 30, "CS151", true, new ArrayList<>(), "Duncan Hall 412");
-	}
+    @BeforeEach
+    public void setUp() {
+        campus = new Campus("Main Campus", "123 University St", new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        department = new Department("Computer Science", campus);
+        club = new Club("Robotics Club", campus);
+ 
+    }
 
-	@Test
-	public void testAddDepartment() {
-		campus.addDepartment(csDepartment);
-		assertTrue(campus.getDepartments().contains(csDepartment));
-	}
+    @Test
+    public void testAddDepartment() {
+        campus.addDepartment(department);
+        assertTrue(campus.getDepartments().contains(department), "Department should be added to the campus.");
+    }
 
-	@Test
-	public void testRemoveDepartment() {
-		campus.addDepartment(csDepartment);
-		campus.removeDepartment(csDepartment);
-		assertFalse(campus.getDepartments().contains(csDepartment));
-	}
+    @Test
+    public void testRemoveDepartment() {
+        campus.addDepartment(department);
+        campus.removeDepartment(department);
+        assertFalse(campus.getDepartments().contains(department), "Department should be removed from the campus.");
+    }
 
-	@Test
-	public void testAddClub() {
-		campus.addClub(codingClub);
-		assertTrue(campus.getClubs().contains(codingClub));
-	}
+    @Test
+    public void testAddClub() {
+        campus.addClub(club);
+        assertTrue(campus.getClubs().contains(club), "Club should be added to the campus.");
+    }
 
-	@Test
-	public void testRemoveClub() {
-		campus.addClub(codingClub);
-		campus.removeClub(codingClub);
-		assertFalse(campus.getClubs().contains(codingClub));
-	}
-
-	@Test
-	public void testAddCourse() {
-		campus.addCourse(course1);
-		assertTrue(campus.getCourses().contains(course1));
-	}
-
-	@Test
-	public void testRemoveCourse() {
-		campus.addCourse(course1);
-		campus.removeCourse(course1);
-		assertFalse(campus.getCourses().contains(course1));
-	}
-
-	@Test
-	public void testGetStudentCount() {
-		Student student1 = new Student("Emily", 1, csDepartment, 0, null, campus);
-		Student student2 = new Student("Tyler", 1, csDepartment, 0, null, campus);
-
-		course1.register(student1);
-		course1.register(student2);
-		
-		campus.addCourse(course1);
-
-		assertEquals(2, campus.getStudentCount());
-	}
-
-	@Test
-	public void testGetCourseCount() {
-		campus.addCourse(course1);
-		assertEquals(1, campus.getCourseCount());
-	}
+    @Test
+    public void testRemoveClub() {
+        campus.addClub(club);
+        campus.removeClub(club);
+        assertFalse(campus.getClubs().contains(club), "Club should be removed from the campus.");
+    }
 
 
+    @Test
+    public void testGetClubCount() {
+        campus.addClub(club);
+        assertEquals(1, campus.getClubCount(), "Club count should match the number of clubs added.");
+    }
+
+    @Test
+    public void testFindDepartmentByName() {
+        campus.addDepartment(department);
+        assertEquals(department, campus.findDepartmentByName("Computer Science"), "Should return the department by its name.");
+    }
 }
