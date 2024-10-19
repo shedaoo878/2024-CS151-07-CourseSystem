@@ -16,6 +16,13 @@ public class Course implements Registerable{
     private ArrayList<Student> admins;
     private Campus campus;
 
+    public Course(Professor professor, Department department, String title, int id) {
+        this.professor = professor;
+        this.department = department;
+        this.title = title;
+        this.id = id;
+    }
+
     public Course(Professor professor, int credits,
                   Department department, int maxAllowed, String title, ArrayList<String> enrolledStudents, int id, Campus campus) {
         this.professor = professor;

@@ -5,6 +5,13 @@ public abstract class Person {
     Department department;
     Campus campus;
 
+    public Person(String name, int id, String email, Department department) {
+        this.name = name;
+        this.id = id;
+        this.email = email;
+        this.department = department;
+    }
+
     public Person(String name, int id, String email, Department department, Campus campus){
         this.name = name;
         this.id = id;

@@ -31,7 +31,7 @@ public class Main {
             Course course1 = new Course(trev, 3, cs, 30, "CS146", new ArrayList<String>(), 1, sjsu);
             Course course2 = new Course(jensen, 3, business, 30, "BUS4118D", new ArrayList<String>(), 2, sjsu);
             Course course3 = new Course(trev, 3, cs, 30, "CS151", new ArrayList<String>(), 3, sjsu);
-
+            Course course4 = new Course(sessions, 3, business, 30, "BUS4119B", new ArrayList<String>(), 4, sjsu);
 
             courses.add(course1);
             courses.add(course2);
