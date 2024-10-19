@@ -13,12 +13,14 @@ public class Professor extends Person implements Admin{
 	private ArrayList<LocalDateTime> officeHours;
 
 	
-	public Professor(String name, int id, String email, Department dep) {
+	public Professor(String name, int id, String email, Department dep, Campus campus) {
 		this.name = name;
 		this.coursesTaught = new ArrayList<>();
 		this.officeHours = new ArrayList<>();
 		this.email = email;
 		this.dep = dep;
+		this.campus = campus;
+		campus.addPerson(this);
 	}
 
 

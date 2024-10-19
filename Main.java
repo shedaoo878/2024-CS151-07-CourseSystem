@@ -17,8 +17,8 @@ public class Main {
             Department cs = new Department("CS", sjsu);
             Department business = new Department("Business", sjsu);
             Student bob = new Student("Bob", 3, cs, 1, "ww", sjsu);
-            Professor trev = new Professor("Dr. Trev", 1, "wwww", cs);
-            Professor jensen = new Professor("Dr. Jensen", 2, "wwty", business);
+            Professor trev = new Professor("Dr. Trev", 1, "wwww", cs, sjsu);
+            Professor jensen = new Professor("Dr. Jensen", 2, "wwty", business, sjsu);
             
             Course course1 = new Course(trev, 3, cs, 30, "CS146", new ArrayList<String>());
             Course course2 = new Course(jensen, 3, business, 30, "BUS4118D", new ArrayList<String>());
@@ -150,4 +150,72 @@ public class Main {
             }
         }   
     }
+
+	public static void departmentMainMenu(Scanner s, Department department) {
+		boolean exit = false;
+		while (!exit) {
+			try {
+				System.out.println("\nDEPARTMENT MANAGEMENT SYSTEM");
+				System.out.println("1 - Change Department of Person");
+				System.out.println("2 - Change Department of Course");
+				System.out.println("3 - View Department Courses");
+				System.out.println("4 - Exit");
+				System.out.print("Please enter your choice: ");
+
+				int choice = s.nextInt();
+				s.nextLine();
+
+				switch (choice) {
+				case 1:
+					System.out.println("You have selected to switch a person's department. Enter the ID of the person: ");
+					int id = s.nextInt();
+					s.nextLine();
+					department.changePersonDepartment(id);
+					break;
+				case 2:
+					System.out.println("You have selected to switch a course's department. Enter the ID of the course: ");
+					//int courseId = s.nextInt();
+					s.nextLine();
+					//department.changeCourseDepartment(courseId);
+					break;
+				case 3:
+					System.out.println("\nCourses in this department: ");
+					for (Course course : courses) {
+						course.getTitle();
+					}
+					break;
+				case 4:
+					exit = true;
+					System.out.println("Exiting department management system.");
+					break;
+				default:
+					System.out.println("Invalid choice. Please enter a number between 1 and 4.");
+				}
+			} catch (InputMismatchException e) {
+				System.out.println("Invalid input. Please enter a number.");
+				s.nextLine();
+			} catch (Exception e) {
+				System.out.println("An error occurred: " + e.getMessage());
+				e.printStackTrace();
+			}
+		}
+	}
+
+	private static Course findCourseByTitle(String title) {
+		for (Course course : courses) {
+			if (course.getTitle().equalsIgnoreCase(title)) {
+				return course;
+			}
+		}
+		return null;
+	}
+
+	private static Student findStudentByName(String name, Department department) {
+		for (Student student : department.getStudentsInDep()) {
+			if (student.getName().equalsIgnoreCase(name)) {
+				return student;
+			}
+		}
+		return null;
+}
 }

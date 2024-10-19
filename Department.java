@@ -72,4 +72,14 @@ public class Department {
         return "Department: " + depName + " (Courses: " + coursesInDep.size() + 
                ", Students: " + studentsInDep.size() + ", Professors: " + profsInDep.size() + ")";
     }
+
+    public void changePersonDepartment(int id){
+        Person person = campus.getPerson(id);
+        if(person != null){
+            person.setDepartment(this);
+            System.out.println(person.getName() + " is now part of Department " + depName);
+        }else{
+            System.out.println("Student/Professor withID " + id + " is not found.");
+        }
+    }
 }
