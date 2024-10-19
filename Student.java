@@ -74,7 +74,6 @@ public class Student extends Person implements Admin {
         return studentId;
     }
 
-
     public void registerClass(Registerable course) {
         if (((Course) course).getDepartment() != this.getDepartment()) {
             System.out.println("This student is not allowed to take this course. Allowed department is " + ((Course) course).getDepartment().getName());
@@ -82,12 +81,14 @@ public class Student extends Person implements Admin {
         }
         if((((Course)course).getCredits() + courseCredits) < MAXCREDITS){
             ((Course)course).register(this);
+            courseCredits += ((Course)course).getCredits();
         }
         else{
             System.out.println("You cannot take above 17 credits. Please take next semester or find another course.");
             getCurrentCredits();
         }
     }
+
     public void dropClass(Course course){
         if((((Course)course).getCredits() - courseCredits) > MINCREDITS){
             ((Course)course).drop(this);
@@ -100,6 +101,23 @@ public class Student extends Person implements Admin {
     }
     public void addRegisteredCourse(Course course) {
         currentEnrolledCourses.add(course);
+    }
+
+    //add an enroll course method to make sure eligible course has is added to currentEnrolledCourses
+    public void addCourse(Course course) {
+        if (!currentEnrolledCourses.contains(course)) {
+            currentEnrolledCourses.add(course);
+        } else {
+            System.out.println("Student is already enrolled in " + course.getTitle());
+        }
+    }
+
+    public void removeCourse(Course course) {
+        if (currentEnrolledCourses.contains(course)) {
+            currentEnrolledCourses.remove(course);
+        } else {
+            System.out.println("Student is not enrolled in " + course.getTitle());
+        }
     }
 
     public ArrayList<Course> getCurrentEnrolledCourses() {
@@ -174,11 +192,11 @@ public class Student extends Person implements Admin {
                 System.out.print("Would you like to register for this course? (y to register / n to not register and return back to course menu): ");    
 
                 String willRegister = scanner.next();
-                if(willRegister.equals("y")){
+                if(willRegister.equalsIgnoreCase("y")){
                     this.registerClass(selectedCourse);
                     choice = 0;
                 }
-                else if(willRegister.equals("n")){
+                else if(willRegister.equalsIgnoreCase("n")){
                     choice = 0;
                     addClasses(scanner, availableCourses);
                 }
