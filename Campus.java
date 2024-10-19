@@ -6,12 +6,14 @@ public class Campus {
     private ArrayList<Department> departments;
     private ArrayList<Club> clubs;
     private ArrayList<Course> courses;
+    private ArrayList<Person> listOfPeople;
 
     public Campus(String campusName) {
         this.campusName = campusName;
         this.departments = new ArrayList<>();
         this.clubs = new ArrayList<>();
         this.courses = new ArrayList<>();
+        this.listOfPeople = new ArrayList<>();
     }
 
     public void addDepartment(Department department) {
@@ -146,8 +148,30 @@ public class Campus {
         System.out.println("Total Students: " + getStudentCount());
     }
 
+
     @Override
     public String toString() {
         return "Campus: " + campusName + " (Location: " + location + ")";
     }
+
+    public Person getPerson(int id){
+        for(Person p : listOfPeople){
+            if(p.getId() == id){
+                return p;
+            }
+        }
+        return null;
+    }
+    public void addPerson(Person person){
+        listOfPeople.add(person);
+    }
+    public Course findCourseById(int id){
+        for(Course c : courses){
+            if(c.getId() == id){
+                return c;
+            }
+        }
+        return null;
+    }
+
 }
