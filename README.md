@@ -1,4 +1,4 @@
-School Course - Student Management System in Java
+
 
 Authors: Joshua Gonzalez, Shivansh Hedaoo, Santhosh Ravindrabharathy, Henry To
 
@@ -6,6 +6,10 @@ Project Overiview
 The School Course project is a campus management system designed to organize and manage courses, student enrollments, and faculty in one organized OOP system. The system consists of several classes, the main ones including Department, Course, Student, and Professor. This management system allows users to perform operations such as adding and viewing courses, enrolling for classes, and managing admin privelages.
 
 The project leverages Object-Oriented Programming principles, including inheritance and polymorphism, to create a structured and reusable codebase. Comprehensive testing ensures functionality and reliability throughout the system.
+
+
+
+
 
 Design ------------------------
 
@@ -29,9 +33,22 @@ A Registrable interface is utilized by the Course and Club classes to reduce red
 A second Admin interface is utilized to provide common privalges to any Person in the system who is set as an admin. All professor are set as admins by default, but can assign other students as admins as well. These admins are given the privaleges to set student grades, and add other admins.
 
 
-Class Diagram representing the relationships between classes:
+
+
+
+
+
+
+
+Class Diagram representing the relationships between classes (also included in the repo):
 
 ![image]([https://github.com/user-attachments/assets/b470f04b-2183-4333-ab6a-95ab9a218331](https://github.com/shedaoo878/2024-CS151-07-CourseSystem/blob/1daed41f56907cec9170e0afdbbe8609ca1763a2/image.png))
+
+
+
+
+
+
 
 
 

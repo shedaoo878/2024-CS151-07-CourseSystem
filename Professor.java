@@ -145,7 +145,6 @@ public class Professor extends Person implements Admin{
 				System.out.println();
 				System.out.println("1 - Add Student Grade");
 				System.out.println("2 - Assign a Student Admin");
-				System.out.println("3 - Schedule Office Hours");
 				System.out.println();
 				System.out.print("Please enter your choice (enter 0 to exit): ");
 				int choice2 = s.nextInt();
@@ -178,7 +177,10 @@ public class Professor extends Person implements Admin{
 							System.out.println("This student is not in this course.");
 						}
 					}
+					
 				}
+				return;
+
 
 						
 

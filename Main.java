@@ -52,21 +52,14 @@ public class Main {
             // LocalDateTime LDT3 = LocalDateTime.of(2024, 10, 20, 15, 30);
             // LocalDateTime LDT4 = LocalDateTime.of(2024, 10, 22, 15, 30);
             
-<<<<<<< Updated upstream
-            trev.scheduleOfficeHours(LDT1);
-            trev.scheduleOfficeHours(LDT2);
-            jensen.scheduleOfficeHours(LDT3);
-            jensen.scheduleOfficeHours(LDT4);
-            taylor.scheduleOfficeHours(LDT1);
-            taylor.scheduleOfficeHours(LDT2);
-            sessions.scheduleOfficeHours(LDT3);
-            sessions.scheduleOfficeHours(LDT4);
-=======
             // trev.scheduleOfficeHours(LDT1);
             // trev.scheduleOfficeHours(LDT2);
             // jensen.scheduleOfficeHours(LDT3);
             // jensen.scheduleOfficeHours(LDT4);
->>>>>>> Stashed changes
+            // taylor.scheduleOfficeHours(LDT1);
+            // taylor.scheduleOfficeHours(LDT2);
+            // sessions.scheduleOfficeHours(LDT3);
+            // sessions.scheduleOfficeHours(LDT4);
             
             trev.viewOfficeHours();
             jensen.viewOfficeHours();
@@ -82,14 +75,10 @@ public class Main {
             jensen.addCourse(course2);
             sessions.addCourse(course4);
             
-<<<<<<< Updated upstream
-            trev.displayInfo();
-            jensen.displayInfo();
-            taylor.displayInfo();
-            sessions.displayInfo();
-=======
-    
->>>>>>> Stashed changes
+            // trev.displayInfo();
+            // jensen.displayInfo();
+            // taylor.displayInfo();
+            // sessions.displayInfo();
             
 
             System.out.println("----------------");
