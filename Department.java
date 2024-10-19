@@ -16,6 +16,15 @@ public class Department {
         campus.addDepartment(this);
     }
 
+     public Department(String depName, Campus campus, ArrayList<Course> courses, ArrayList<Student> students, ArrayList<Professor> professors) {
+        this.depName = depName;
+        this.campus = campus;
+        this.coursesInDep = new ArrayList<>(courses); 
+        this.studentsInDep = new ArrayList<>(students); 
+        this.profsInDep = new ArrayList<>(professors); 
+        campus.addDepartment(this);
+    }
+
     public void addCourse(Course c) {
         if (!coursesInDep.contains(c)) {
             c.setDepartment(this);
