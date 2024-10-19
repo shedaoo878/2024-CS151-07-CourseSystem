@@ -26,7 +26,7 @@ Abstract Classes and Interfaces:
 
 Abstract classes can be used to define common behaviors for related classes (e.g., a base class for all users with common attributes).
 
-Class Diagram
+Class Diagram:
 
 ![cs151diagram](https://github.com/user-attachments/assets/e3a2735e-984f-4f4c-8eee-a96b18aeabfe)
 
