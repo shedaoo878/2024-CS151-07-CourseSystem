@@ -4,81 +4,54 @@ import java.util.List;
 public class Club implements Registerable {
     private String clubName;
     private String description;
-    private List<Student> members;
-    private Campus campus;
+    private final List<Student> members = new ArrayList<>();
+    private final Campus campus;
     private int maxMembers;
 
+    // Consolidated constructor with default values for optional parameters
     public Club(String clubName, String description, Campus campus, int maxMembers) {
         this.clubName = clubName;
-        this.description = description;
-        this.members = new ArrayList<>();
+        this.description = (description != null) ? description : "";
         this.campus = campus;
-        this.maxMembers = maxMembers;
+        this.maxMembers = (maxMembers > 0) ? maxMembers : 10;
         campus.addClub(this);
     }
-    
-	public Club(String clubName, Campus campus) {
-		this.clubName = clubName;
-		this.description = "";
-		this.members = new ArrayList<>();
-		this.campus = campus;
-		this.maxMembers = 10;
-		campus.addClub(this);
-	}
-   
+
+    public Club(String clubName, Campus campus) {
+        this(clubName, "", campus, 10);
+    }
+
     @Override
     public void register(Student student) {
-        if (student != null && !members.contains(student) && members.size() < maxMembers) {
+        if (student == null || members.contains(student)) {
+            printErrorMessage(student, "already registered or invalid");
+        } else if (isFull()) {
+            printErrorMessage(student, "club is full");
+        } else {
             members.add(student);
             student.addToClubs(this);
-            System.out.println(student.getName() + " has been registered for the club: " + this.getClubName());
-        } else if (members.contains(student)) {
-            System.out.println(student.getName() + " is already a member of the club: " + this.getClubName());
-        } else if (members.size() >= maxMembers) {
-            System.out.println("Club is full. Registration failed for " + student.getName());
-        } else {
-            System.out.println("Invalid student. Club registration failed.");
+            System.out.println(student.getName() + " has been registered for the club: " + clubName);
         }
     }
 
     @Override
     public void drop(Student student) {
-        if (student != null && members.contains(student)) {
-            members.remove(student);
-            System.out.println(student.getName() + " has been dropped from the club: " + this.getClubName());
-        } else if (!members.contains(student)) {
-            System.out.println(student.getName() + " is not a member of the club: " + this.getClubName());
+        if (student == null || !members.contains(student)) {
+            printErrorMessage(student, "not a member or invalid");
         } else {
-            System.out.println("Invalid student. Club drop failed.");
+            members.remove(student);
+            System.out.println(student.getName() + " has been dropped from the club: " + clubName);
         }
-    }
-    
-    public boolean addMember(Student student) {
-        if (members.size() < maxMembers && !members.contains(student)) {
-            members.add(student);
-            return true;
-        }
-        return false;
     }
 
-    public boolean removeMember(Student student) {
-        return members.remove(student);
+    // Consolidated error message handling
+    private void printErrorMessage(Student student, String reason) {
+        String name = (student != null) ? student.getName() : "Unknown";
+        System.out.println("Error: " + name + " - " + reason + " for the club: " + clubName);
     }
-    
 
     public String listMembers() {
-        if (members.isEmpty()) {
-            return "No students are in this club.";
-        } else {
-            StringBuilder memberList = new StringBuilder();
-            for (int i = 0; i < members.size(); i++) {
-                memberList.append(members.get(i).getName());
-                if (i < members.size() - 1) {
-                    memberList.append(", ");
-                }
-            }
-            return memberList.toString();
-        }
+        return members.isEmpty() ? "No students are in this club." : String.join(", ", members.stream().map(Student::getName).toList());
     }
 
     public boolean isFull() {
@@ -103,6 +76,7 @@ public class Club implements Registerable {
         System.out.println("Description: " + description);
         System.out.println("Members: " + members.size() + "/" + maxMembers);
     }
+
     public String getClubName() {
         return clubName;
     }

@@ -1,79 +1,75 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class Department {
-    private String depName;
-    private ArrayList<Course> coursesInDep;
-    private ArrayList<Student> studentsInDep;
-    private ArrayList<Professor> profsInDep;
-    private Campus campus;
+    private final String depName;
+    private final List<Course> coursesInDep;
+    private final List<Student> studentsInDep;
+    private final List<Professor> profsInDep;
+    private final Campus campus;
+
+    public Department(String depName, Campus campus, List<Course> courses, List<Student> students, List<Professor> professors) {
+        this.depName = depName;
+        this.campus = campus;
+        this.coursesInDep = new ArrayList<>(courses != null ? courses : new ArrayList<>());
+        this.studentsInDep = new ArrayList<>(students != null ? students : new ArrayList<>());
+        this.profsInDep = new ArrayList<>(professors != null ? professors : new ArrayList<>());
+        campus.addDepartment(this);
+    }
 
     public Department(String depName, Campus campus) {
-        this.depName = depName;
-        this.coursesInDep = new ArrayList<>();
-        this.studentsInDep = new ArrayList<>();
-        this.profsInDep = new ArrayList<>();
-        this.campus = campus;
-        campus.addDepartment(this);
+        this(depName, campus, new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
     }
 
-     public Department(String depName, Campus campus, ArrayList<Course> courses, ArrayList<Student> students, ArrayList<Professor> professors) {
-        this.depName = depName;
-        this.campus = campus;
-        this.coursesInDep = new ArrayList<>(courses); 
-        this.studentsInDep = new ArrayList<>(students); 
-        this.profsInDep = new ArrayList<>(professors); 
-        campus.addDepartment(this);
-    }
-
-    public void addCourse(Course c) {
-        if (!coursesInDep.contains(c)) {
-            coursesInDep.add(c);
-            System.out.println("Course " + c.getTitle() + " added to department " + depName);
+    public void addCourse(Course course) {
+        if (course != null && coursesInDep.add(course)) {
+            System.out.println("Course " + course.getTitle() + " added to department " + depName);
         } else {
-            System.out.println("Course " + c.getTitle() + " is already in the department.");
+            printErrorMessage("Course", course != null ? course.getTitle() : "Unknown", "already in department or invalid");
         }
     }
 
-    public void removeCourse(Course c) {
-        coursesInDep.remove(c);
+    public void removeCourse(Course course) {
+        coursesInDep.remove(course);
     }
 
-    public void addStudent(Student s) {
-        if (!studentsInDep.contains(s)) {
-            s.setDepartment(this);
-            studentsInDep.add(s);
-            System.out.println("Student " + s.getName() + " added to department " + depName);
+    public void addStudent(Student student) {
+        if (student != null && studentsInDep.add(student)) {
+            student.setDepartment(this);
+            System.out.println("Student " + student.getName() + " added to department " + depName);
         } else {
-            System.out.println("Student " + s.getName() + " is already in the department.");
+            printErrorMessage("Student", student != null ? student.getName() : "Unknown", "already in department or invalid");
         }
     }
 
-    public void addProf(Professor p) {
-        if (!profsInDep.contains(p)) {
-            p.setDepartment(this);
-            profsInDep.add(p);
-            System.out.println("Professor " + p.getName() + " added to department " + depName);
+    public void addProf(Professor professor) {
+        if (professor != null && profsInDep.add(professor)) {
+            professor.setDepartment(this);
+            System.out.println("Professor " + professor.getName() + " added to department " + depName);
         } else {
-            System.out.println("Professor " + p.getName() + " is already in the department.");
+            printErrorMessage("Professor", professor != null ? professor.getName() : "Unknown", "already in department or invalid");
         }
+    }
+
+    private void printErrorMessage(String entityType, String entityName, String message) {
+        System.out.println("Error: " + entityType + " " + entityName + " - " + message);
     }
 
     public String getName() {
-        return this.depName;
+        return depName;
     }
 
-    public ArrayList<Course> getCoursesInDep() {
+    public final List<Course> getCoursesInDep() {
         return new ArrayList<>(coursesInDep);
     }
 
-    public ArrayList<Student> getStudentsInDep() {
+    public final List<Student> getStudentsInDep() {
         return new ArrayList<>(studentsInDep);
     }
 
-    public ArrayList<Professor> getProfsInDep() {
+    public final List<Professor> getProfsInDep() {
         return new ArrayList<>(profsInDep);
     }
-
 
     public Campus getCampus() {
         return campus;
@@ -81,33 +77,29 @@ public class Department {
 
     @Override
     public String toString() {
-        return "Department: " + depName + " (Courses: " + coursesInDep.size() + 
-               ", Students: " + studentsInDep.size() + ", Professors: " + profsInDep.size() + ")";
+        return "Department: " + depName + " (Courses: " + coursesInDep.size() + ", Students: " + studentsInDep.size() + ", Professors: " + profsInDep.size() + ")";
     }
 
-    public void changePersonDepartment(int id){
+    public void changePersonDepartment(int id) {
         Person person = campus.getPerson(id);
-        if(this.studentsInDep.contains(person) || this.profsInDep.contains(person)){
-            System.out.println( "This Person is already in Department " + depName);
-        }
-       else if(person != null){
+        if (person == null) {
+            System.out.println("Student/Professor with ID " + id + " not found.");
+        } else if (studentsInDep.contains(person) || profsInDep.contains(person)) {
+            System.out.println("This Person is already in Department " + depName);
+        } else {
             person.setDepartment(this);
             System.out.println(person.getName() + " is now part of Department " + depName);
-        }else{
-            System.out.println("Student/Professor withID " + id + " is not found.");
         }
     }
 
-    public void changeCourseDepartment(int id){
+    public void changeCourseDepartment(int id) {
         Course course = campus.findCourseById(id);
-        if(this.coursesInDep.contains(course)){
+        if (course == null) {
+            System.out.println("Course with ID " + id + " not found.");
+        } else if (coursesInDep.contains(course)) {
             System.out.println("This course is already in Department " + depName);
-        }
-        else if(course != null){
+        } else {
             course.setDepartment(course.getDepartment(), this);
-        }
-        else{
-            System.out.println("Course with ID " + id + " is not found.");
         }
     }
 }
